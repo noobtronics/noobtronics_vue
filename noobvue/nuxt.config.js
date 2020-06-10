@@ -23,16 +23,26 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    "~assets/sass/main.sass",
+  ],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [],
+
+  styleResources: {
+   sass: [
+     "node_modules/bulma/sass/utilities/_all.sass",
+     "~assets/sass/mobile-mixin.sass",
+   ],
+ },
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     '@nuxt/typescript-build',
+    '@nuxtjs/style-resources',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module'
   ],
@@ -40,8 +50,6 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
