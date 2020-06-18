@@ -30,7 +30,7 @@
       <div class="container fullwdithcontainer">
         <h2 class="c">Shop Electronic Components</h2>
 
-        <div v-for="c in catalog" v-bind:key="c">
+        <div v-for="c in catalog" :key="c.name">
           <h3 class="title has-text-centered is-5">{{ c.name }}</h3>
 
           <div class="columns horizontalprodmainrow">
@@ -38,8 +38,8 @@
               <div class="columns is-mobile horizontalprodcards">
                 <div
                   v-for="prod in c.products"
+                  :key="prod.slug + prod.cardtitle"
                   class="column horizontalprodcolumn"
-                  v-bind:key="prod"
                 >
                   <a :href="'/' + prod.slug">
                     <div class="card" style="height: 100%">
@@ -124,43 +124,6 @@
           </div>
         </div>
         <hr />
-        <div
-          class="columns is-vcentered"
-          style="margin:0;"
-          id="subscribe_email"
-        >
-          <div class="column is-7 has-text-centered">
-            <h4 class="title is-4">Join our newsletter!</h4>
-            <p class="subtitle is-6">We'll never share your email address.</p>
-          </div>
-          <div class="column is-5">
-            <div
-              class="field has-addons"
-              style="padding-bottom:10px;padding-left:10px;padding-right:10px;"
-            >
-              <div class="control is-expanded">
-                <input
-                  class="input"
-                  type="email"
-                  placeholder="Email"
-                  aria-label="email"
-                  aria-describedby="call-to-action-button-04"
-                  v-model="email"
-                />
-              </div>
-              <div class="control">
-                <button
-                  class="button"
-                  style="background-color:#A91E45;color:white;border-color:transparent;"
-                  id="call-to-action-button-04"
-                  v-on:click="submit_email"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   </div>
@@ -175,7 +138,6 @@ export default {
   },
   async asyncData({ $axios }) {
     const data = await $axios.$get('/api/homepage')
-    console.log(data)
     return {
       meta: data.meta,
       catalog: data.catalog
