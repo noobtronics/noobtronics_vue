@@ -1,8 +1,8 @@
 <template>
   <div
+    id="subscribe_email"
     class="columns is-vcentered"
     style="margin-bottom: 1rem;"
-    id="subscribe_email"
   >
     <div class="column is-7 has-text-centered">
       <h4 class="title is-4">Join our newsletter!</h4>
@@ -15,20 +15,20 @@
       >
         <div class="control is-expanded">
           <input
+            v-model="email"
             class="input"
             type="email"
             placeholder="Email"
             aria-label="email"
             aria-describedby="call-to-action-button-04"
-            v-model="email"
           />
         </div>
         <div class="control">
           <button
+            id="call-to-action-button-04"
             class="button"
             style="background-color:#A91E45;color:white;border-color:transparent;"
-            id="call-to-action-button-04"
-            v-on:click="submit_email"
+            @click="submit_email"
           >
             Subscribe
           </button>
@@ -54,13 +54,10 @@ export default {
         .then(function(response) {
           self.$cookies.set('eid', response.data.email_token, { expires: 999 })
         })
-        .catch(function(error) {
-          console.log(error)
-        })
+        .catch(function() {})
         .then(function() {})
     }
-  },
-  computed: {}
+  }
 }
 </script>
 

@@ -12,9 +12,7 @@
           Shop
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item" href="/shop">
-            All Products
-          </a>
+          <nuxt-link class="navbar-item" to="/shop">All Products</nuxt-link>
           <a class="navbar-item" href="/shop/microcontrollers">
             Microcontrollers
           </a>
@@ -77,8 +75,7 @@
               <span class="icon">
                 <img
                   alt="store icon"
-                  class="lazyload"
-                  data-src="/static/images/icons/store_icon.png"
+                  src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAAiUlEQVRIie2UMQqAMAxFX8WxeJmO4j0EZz1tLyMeQAcpllrtkKBLHwRCAkk+TQqVAiYT2zVrNsJiRd4a9MCQ8dUaNFxyY1+E43wDibk3BYvCkPNTwgKrgoIN6HIKpjghwAJjLuEVpg/mQ9F4M6QHlmLgg0NLCRLV8r9+FbUBAO1DXG1lP1/Tyo0Di5BBbnFxxIoAAAAASUVORK5CYII="
                 />
               </span>
               <span>
@@ -95,8 +92,7 @@
               <span class="icon">
                 <img
                   alt="checkout icon"
-                  class="lazyload"
-                  data-src="/static/images/icons/cart_icon.png"
+                  src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA1ElEQVRIid3UP2oCQRiG8V8kkFoktZUHEDxEREJOkzN4AzsRBG+QUkj63MBSbZIqTUgC/itWcDGgM+usoC981X48zzsws1xLVlhvZ1CGYJkT/OK+DAm85ERF5zUPrOwJeglK1g59vMGkQOv8PB5r8HwC/C3kiFV8F4Cv0AoRkF3VWMEwFA7NSPgP6jECeI8QdGPhNXwGNh/hLlbQ3wLGsqubNFUs8IdGajjc4kuxdxCcJ3yUKSg9HcwxQzvB3r/M7I49PWVv/3d9trRl7aZ4SLB3wdkAc+mm8AY1w/kAAAAASUVORK5CYII="
                 />
               </span>
               <span>Checkout</span>
