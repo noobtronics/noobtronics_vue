@@ -1,0 +1,66 @@
+<template>
+  <footer class="footer">
+    <div class="container">
+      <h2 class="c">noobtronics Footer</h2>
+      <div class="columns is-desktop">
+        <div class="column is-5">
+          <a class="title is-5" href="/">noobtronics</a>
+          <p class="block">
+            For noobs to become pro electronics. We manufacture, sell and blog
+            about Open Source hardware.
+          </p>
+        </div>
+        <div class="column">
+          <div class="columns is-mobile is-multiline">
+            <div class="column is-half">
+              <h3 class="title is-6">Products</h3>
+              <ul>
+                <li><a href="/">Microcontrollers</a></li>
+                <li><a href="/">Arduino Kits</a></li>
+                <li><a href="/">LCD Module</a></li>
+                <li><a href="/">Tinkering Supply</a></li>
+              </ul>
+            </div>
+            <div class="column is-half">
+              <h3 class="title is-6">Your Account</h3>
+              <ul>
+                <li><a href="#">Cart(0)</a></li>
+                <li><a href="#">Your Orders</a></li>
+              </ul>
+            </div>
+
+            <div class="column is-half">
+              <h3 class="title is-6">Contact</h3>
+              <ul>
+                <li><a href="#">+91-9833870385</a></li>
+                <li>Aurangabad, India</li>
+              </ul>
+            </div>
+            <div class="column is-half">
+              <h3 class="title is-6">Blog</h3>
+              <ul>
+                <li><a href="#">Learn Arduino</a></li>
+                <li><a href="#">Datasheet</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="columns is-mobile">
+        <div class="column"><a href="#">Terms and conditions</a></div>
+        <div class="column has-text-right-tablet">
+          <p class="subtitle is-6">
+            &copy; 2020 noobtronics™ <br />Registered Trademark in India
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+export default {}
+</script>
+
+<style lang="sass"></style>

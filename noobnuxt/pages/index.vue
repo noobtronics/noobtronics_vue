@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container fullwdithcontainer">
     <HeaderMenu />
 
     <section class="hero">
@@ -126,15 +126,21 @@
         <hr />
       </div>
     </section>
+    <SubscribeEmail />
+    <Footer />
   </div>
 </template>
 
 <script>
 import HeaderMenu from '~/components/HeaderMenu.vue'
+import Footer from '~/components/Footer.vue'
+import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
 
 export default {
   components: {
-    HeaderMenu
+    HeaderMenu,
+    Footer,
+    SubscribeEmail
   },
   async asyncData({ $axios }) {
     const data = await $axios.$get('/api/homepage')
