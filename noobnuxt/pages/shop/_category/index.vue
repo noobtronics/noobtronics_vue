@@ -3,86 +3,94 @@
     <HeaderMenu />
     <section class="section fullwidthmobilesection shoppagesection">
       <div class="container fullwdithcontainer">
-        <h1 class="c">Shop</h1>
-        <h2 class="c">Browse All Electronic Components and Kits</h2>
-
-        <h2 class="title is-5 has-text-centered shophead">
-          Browse By Category
-        </h2>
-        <div class="buttons is-centered">
-          <nuxt-link
-            v-for="cat in categorys"
-            :key="cat.name"
-            class="button  is-medium is-active"
-            :to="'/shop/' + cat.slug"
-          >
-            {{ cat.name }}
-          </nuxt-link>
+        <div v-if="!found">
+          <Error404 />
         </div>
+        <div v-else>
+          <h1 class="c">Shop</h1>
+          <h2 class="c">Browse All Electronic Components and Kits</h2>
 
-        <h2 class="title is-5 has-text-centered">Browse All</h2>
-        <div class="columns shopprodrow">
-          <div class="column prodcolumn">
-            <div
-              v-for="(prod, idx) in products"
-              :key="prod.cardname + prod.cardtitle"
-              class="card"
+          <h2 class="title is-5 has-text-centered shophead">
+            Browse By Category
+          </h2>
+          <div class="buttons is-centered">
+            <nuxt-link
+              v-for="cat in categorys"
+              :key="cat.name"
+              class="button  is-medium is-active"
+              :to="'/shop/' + cat.slug"
             >
-              <div class="card-image">
-                <figure
-                  class="image"
-                  style="object-fit: cover; cursor:pointer;"
-                  @click="window.location.href = '/' + prod.slug"
-                >
-                  <picture>
-                    <source :data-srcset="prod.thumb.webp" type="image/webp" />
-                    <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
+              {{ cat.name }}
+            </nuxt-link>
+          </div>
 
-                    <img
-                      v-if="idx <= 4"
-                      :src="prod.thumb.jpg"
-                      :alt="prod.thumb.alt"
-                      width="150"
-                      height="150"
-                    />
-
-                    <img
-                      v-if="idx > 4"
-                      :data-src="prod.thumb.jpg"
-                      :alt="prod.thumb.alt"
-                      width="150"
-                      height="150"
-                      class="lazyload"
-                    />
-                  </picture>
-                </figure>
-              </div>
-              <div class="footerblock">
-                <footer class="card-footer">
-                  <a :href="'/' + prod.slug"
-                    ><p class="cardhead">{{ prod.cardname }}</p></a
+          <h2 class="title is-5 has-text-centered">Browse All</h2>
+          <div class="columns shopprodrow">
+            <div class="column prodcolumn">
+              <div
+                v-for="(prod, idx) in products"
+                :key="prod.cardname + prod.cardtitle"
+                class="card"
+              >
+                <div class="card-image">
+                  <figure
+                    class="image"
+                    style="object-fit: cover; cursor:pointer;"
+                    @click="window.location.href = '/' + prod.slug"
                   >
-                </footer>
+                    <picture>
+                      <source
+                        :data-srcset="prod.thumb.webp"
+                        type="image/webp"
+                      />
+                      <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
 
-                <footer class="card-footer">
-                  <p class="cardsubtitle">{{ prod.cardtitle }}</p>
-                </footer>
-                <footer class="card-footer">
-                  <p class="card-footer-item">
-                    <span class="price"> ₹{{ prod.price }} </span>
-                  </p>
-                  <p class="card-footer-item">
-                    <span>
-                      <button class="button is-small is-warning">
-                        Add to Cart
-                      </button>
-                    </span>
-                  </p>
-                </footer>
+                      <img
+                        v-if="idx <= 4"
+                        :src="prod.thumb.jpg"
+                        :alt="prod.thumb.alt"
+                        width="150"
+                        height="150"
+                      />
+
+                      <img
+                        v-if="idx > 4"
+                        :data-src="prod.thumb.jpg"
+                        :alt="prod.thumb.alt"
+                        width="150"
+                        height="150"
+                        class="lazyload"
+                      />
+                    </picture>
+                  </figure>
+                </div>
+                <div class="footerblock">
+                  <footer class="card-footer">
+                    <a :href="'/' + prod.slug"
+                      ><p class="cardhead">{{ prod.cardname }}</p></a
+                    >
+                  </footer>
+
+                  <footer class="card-footer">
+                    <p class="cardsubtitle">{{ prod.cardtitle }}</p>
+                  </footer>
+                  <footer class="card-footer">
+                    <p class="card-footer-item">
+                      <span class="price"> ₹{{ prod.price }} </span>
+                    </p>
+                    <p class="card-footer-item">
+                      <span>
+                        <button class="button is-small is-warning">
+                          Add to Cart
+                        </button>
+                      </span>
+                    </p>
+                  </footer>
+                </div>
               </div>
-            </div>
 
-            <div class="card hidden"></div>
+              <div class="card hidden"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -96,6 +104,7 @@
 
 <script>
 import HeaderMenu from '~/components/HeaderMenu.vue'
+import Error404 from '~/components/error/Error404.vue'
 import Footer from '~/components/Footer.vue'
 import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
 
@@ -103,34 +112,30 @@ export default {
   components: {
     HeaderMenu,
     Footer,
-    SubscribeEmail
+    SubscribeEmail,
+    Error404
   },
   async fetch() {
+    const that = this
+
     const data = await this.$axios
       .$post('/api/static/shoppage', {
         slug: '/shop/' + this.$route.params.category
       })
-      .catch((error) => {
-        if (error.response.status === 404) {
-          return 'error'
-        }
-        return 'error'
+      .catch(() => {
+        that.$raise404(that)
       })
-    if (data === 'error') {
-      if (process.server) {
-        this.$nuxt.context.res.statusCode = 404
-      }
-      console.log('error identified')
-      this.$nuxt.error({ statusCode: 404, message: 'Data not found' })
-      throw new Error('Page not found')
+
+    if (data) {
+      this.found = true
+      this.categorys = data.categorys
+      this.products = data.products
+      this.meta = data.meta
     }
-    this.categorys = data.categorys
-    this.products = data.products
-    this.meta = data.meta
   },
   data() {
     return {
-      data: {},
+      found: false,
       categorys: [],
       products: [],
       meta: {}

@@ -24,7 +24,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/lazysizes.js'],
+  plugins: [
+    '@/plugins/lazysizes.js',
+    '@/plugins/raise404.js'
+  ],
 
   styleResources: {
      sass: [
