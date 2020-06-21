@@ -1,7 +1,6 @@
 <template>
   <div class="container fullwdithcontainer">
     <HeaderMenu />
-
     <section class="section fullwidthmobilesection shoppagesection">
       <div class="container fullwdithcontainer">
         <h1 class="c">Shop</h1>
@@ -48,7 +47,7 @@
                     />
 
                     <img
-                      v-else
+                      v-if="idx > 4"
                       :data-src="prod.thumb.jpg"
                       :alt="prod.thumb.alt"
                       width="150"
@@ -107,12 +106,27 @@ export default {
     SubscribeEmail
   },
   async fetch() {
-    this.data = await this.$axios.$post('/api/static/shoppage', {
-      slug: '/shop'
-    })
-    this.categorys = this.data.categorys
-    this.products = this.data.products
-    this.meta = this.data.meta
+    const data = await this.$axios
+      .$post('/api/static/shoppage', {
+        slug: '/shop/' + this.$route.params.category
+      })
+      .catch((error) => {
+        if (error.response.status === 404) {
+          return 'error'
+        }
+        return 'error'
+      })
+    if (data === 'error') {
+      if (process.server) {
+        this.$nuxt.context.res.statusCode = 404
+      }
+      console.log('error identified')
+      this.$nuxt.error({ statusCode: 404, message: 'Data not found' })
+      throw new Error('Page not found')
+    }
+    this.categorys = data.categorys
+    this.products = data.products
+    this.meta = data.meta
   },
   data() {
     return {

@@ -142,14 +142,23 @@ export default {
     Footer,
     SubscribeEmail
   },
-  async asyncData({ $axios }) {
-    const data = await $axios.$get('/api/homepage')
+  async fetch() {
+    this.data = await this.$axios.$post('/api/static/homepage')
+    this.catalog = this.data.catalog
+    this.meta = this.data.meta
+  },
+  data() {
     return {
-      meta: data.meta,
-      catalog: data.catalog
+      data: {},
+      catalog: [],
+      meta: {}
     }
   },
-  data: () => ({}),
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
+      this.$fetch()
+    }
+  },
   methods: {},
   head() {
     return {
