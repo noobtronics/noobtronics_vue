@@ -1,9 +1,9 @@
 <template>
   <div class="navbar-menu" :class="{ 'is-active': is_bar_active }">
     <div class="navbar-start">
-      <a class="navbar-item" href="/">
+      <nuxt-link class="navbar-item" to="/">
         Home
-      </a>
+      </nuxt-link>
       <div
         class="navbar-item has-dropdown is-hoverable"
         :class="{ 'is-active': is_shop }"
@@ -13,18 +13,15 @@
         </a>
         <div class="navbar-dropdown ">
           <nuxt-link class="navbar-item" to="/shop">All Products</nuxt-link>
-          <a class="navbar-item" href="/shop/microcontrollers">
+          <nuxt-link class="navbar-item" to="/shop/microcontrollers">
             Microcontrollers
-          </a>
-          <a class="navbar-item" href="/shop/kits">
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/shop/kits">
             Learning Kits
-          </a>
-          <a class="navbar-item" href="/shop/lcd">
-            LCD Displays
-          </a>
-          <a class="navbar-item" href="/shop/tinkering-supply">
-            Tinkering Supply
-          </a>
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/shop/modules">
+            Modules
+          </nuxt-link>
         </div>
       </div>
       <div
@@ -35,15 +32,15 @@
           Blog
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item" href="/blog">
+          <nuxt-link class="navbar-item" to="/blog">
             Blog Home
-          </a>
-          <a class="navbar-item" href="/blog/arduino">
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/blog/arduino">
             Arduino Blog
-          </a>
-          <a class="navbar-item" href="/blog/datasheet">
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/blog/datasheet">
             Datasheet
-          </a>
+          </nuxt-link>
         </div>
       </div>
       <div
@@ -54,15 +51,15 @@
           Information
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item" href="/about-us">
+          <nuxt-link class="navbar-item" to="/about-us">
             About Us
-          </a>
-          <a class="navbar-item" href="/contact-us">
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/contact-us">
             Contact Us
-          </a>
-          <a class="navbar-item" href="/contact-us">
+          </nuxt-link>
+          <nuxt-link class="navbar-item" to="/delivery-locations">
             Delivery Locations
-          </a>
+          </nuxt-link>
         </div>
       </div>
     </div>
