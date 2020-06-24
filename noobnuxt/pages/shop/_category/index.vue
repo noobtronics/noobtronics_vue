@@ -7,8 +7,8 @@
           <Error404 />
         </div>
         <div v-else>
-          <h1 class="c">Shop</h1>
-          <h2 class="c">Browse All Electronic Components and Kits</h2>
+          <h1 class="c">{{ meta.h1 }}</h1>
+          <h2 class="c">Browse among {{ categoryH2 }}</h2>
 
           <h2 class="title is-5 has-text-centered shophead">
             Browse By Category
@@ -24,74 +24,8 @@
             </nuxt-link>
           </div>
 
-          <h2 class="title is-5 has-text-centered">Browse All</h2>
-          <div class="columns shopprodrow">
-            <div class="column prodcolumn">
-              <div
-                v-for="(prod, idx) in products"
-                :key="prod.cardname + prod.cardtitle"
-                class="card"
-              >
-                <div class="card-image">
-                  <figure
-                    class="image"
-                    style="object-fit: cover; cursor:pointer;"
-                    @click="window.location.href = '/' + prod.slug"
-                  >
-                    <picture>
-                      <source
-                        :data-srcset="prod.thumb.webp"
-                        type="image/webp"
-                      />
-                      <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
-
-                      <img
-                        v-if="idx <= 4"
-                        :src="prod.thumb.jpg"
-                        :alt="prod.thumb.alt"
-                        width="150"
-                        height="150"
-                      />
-
-                      <img
-                        v-if="idx > 4"
-                        :data-src="prod.thumb.jpg"
-                        :alt="prod.thumb.alt"
-                        width="150"
-                        height="150"
-                        class="lazyload"
-                      />
-                    </picture>
-                  </figure>
-                </div>
-                <div class="footerblock">
-                  <footer class="card-footer">
-                    <a :href="'/' + prod.slug"
-                      ><p class="cardhead">{{ prod.cardname }}</p></a
-                    >
-                  </footer>
-
-                  <footer class="card-footer">
-                    <p class="cardsubtitle">{{ prod.cardtitle }}</p>
-                  </footer>
-                  <footer class="card-footer">
-                    <p class="card-footer-item">
-                      <span class="price"> ₹{{ prod.price }} </span>
-                    </p>
-                    <p class="card-footer-item">
-                      <span>
-                        <button class="button is-small is-warning">
-                          Add to Cart
-                        </button>
-                      </span>
-                    </p>
-                  </footer>
-                </div>
-              </div>
-
-              <div class="card hidden"></div>
-            </div>
-          </div>
+          <h2 class="title is-5 has-text-centered">Browse All {{ name }}</h2>
+          <ProductCards :products="products" />
         </div>
       </div>
     </section>
@@ -107,13 +41,15 @@ import HeaderMenu from '~/components/HeaderMenu.vue'
 import Error404 from '~/components/error/Error404.vue'
 import Footer from '~/components/Footer.vue'
 import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
+import ProductCards from '~/components/shop_components/ProductCards.vue'
 
 export default {
   components: {
     HeaderMenu,
     Footer,
     SubscribeEmail,
-    Error404
+    Error404,
+    ProductCards
   },
   async fetch() {
     const that = this
@@ -133,6 +69,7 @@ export default {
       this.categorys = data.categorys
       this.products = data.products
       this.meta = data.meta
+      this.name = data.name
     }
     return data
   },
@@ -141,7 +78,19 @@ export default {
       found: false,
       categorys: [],
       products: [],
-      meta: {}
+      meta: {},
+      name: ''
+    }
+  },
+  computed: {
+    categoryH2: function() {
+      const nameList = []
+      for (const i of this.categorys) {
+        let name = i.name
+        name = name.replace(this.name, '')
+        nameList.push(name.trim())
+      }
+      return nameList.join(', ') + ' ' + this.name
     }
   },
   activated() {
