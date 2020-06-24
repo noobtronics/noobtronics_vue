@@ -117,12 +117,14 @@ export default {
   },
   async fetch() {
     const that = this
+    this.found = true
 
     const data = await this.$axios
       .$post('/api/static/shoppage', {
         slug: '/shop/' + this.$route.params.category
       })
       .catch(() => {
+        that.found = false
         that.$raise404(that)
       })
 
@@ -132,6 +134,7 @@ export default {
       this.products = data.products
       this.meta = data.meta
     }
+    return data
   },
   data() {
     return {
@@ -147,6 +150,7 @@ export default {
     }
   },
   methods: {},
+  fetchOnServer: true,
   head() {
     return {
       title: this.meta.title,
