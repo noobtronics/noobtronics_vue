@@ -18,7 +18,7 @@
               v-for="cat in categorys"
               :key="cat.name"
               class="button  is-medium is-active"
-              :to="'/shop/' + cat.slug"
+              :to="'/' + cat.slug"
             >
               {{ cat.name }}
             </nuxt-link>
