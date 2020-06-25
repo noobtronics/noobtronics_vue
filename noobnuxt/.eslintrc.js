@@ -20,5 +20,6 @@ module.exports = {
   // add your custom rules here
   rules: {
     "object-shorthand": 0,
+    'vue/no-v-html': 0,
   }
 }

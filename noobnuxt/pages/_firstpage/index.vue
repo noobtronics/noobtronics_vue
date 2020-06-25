@@ -1,37 +1,12 @@
 <template>
   <div class="container fullwdithcontainer">
     <HeaderMenu />
-    <section class="section fullwidthmobilesection shoppagesection">
-      <div class="container fullwdithcontainer">
-        <div v-if="!found">
-          <Error404 />
-        </div>
-        <div v-else>
-          <h1 class="c">{{ meta.h1 }}</h1>
-          <h2 class="c">Browse among {{ categoryH2 }}</h2>
-
-          <h2 class="title is-5 has-text-centered shophead">
-            Browse By Category
-          </h2>
-          <div class="buttons is-centered">
-            <nuxt-link
-              v-for="cat in categorys"
-              :key="cat.name"
-              class="button  is-medium is-active"
-              :to="'/' + cat.slug"
-            >
-              {{ cat.name }}
-            </nuxt-link>
-          </div>
-
-          <h2 class="title is-5 has-text-centered">Browse All {{ name }}</h2>
-          <ProductCards :products="products" />
-
-          <div class="content" v-html="meta.html"></div>
-        </div>
-      </div>
-    </section>
-
+    <div v-if="!found">
+      <Error404 />
+    </div>
+    <div v-else>
+      <component :is="component" :data="data" />
+    </div>
     <hr />
     <SubscribeEmail />
     <Footer />
@@ -43,7 +18,8 @@ import HeaderMenu from '~/components/HeaderMenu.vue'
 import Error404 from '~/components/error/Error404.vue'
 import Footer from '~/components/Footer.vue'
 import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
-import ProductCards from '~/components/shop_components/ProductCards.vue'
+
+import SubCategoryPage from '~/components/page_components/SubCategoryPage.vue'
 
 export default {
   components: {
@@ -51,15 +27,15 @@ export default {
     Footer,
     SubscribeEmail,
     Error404,
-    ProductCards
+    SubCategoryPage
   },
   async fetch() {
     const that = this
     this.found = true
 
     const data = await this.$axios
-      .$post('/api/static/shoppage', {
-        slug: '/shop/' + this.$route.params.category
+      .$post('/api/static/firstpage', {
+        slug: '/' + this.$route.params.firstpage
       })
       .catch(() => {
         that.found = false
@@ -68,18 +44,19 @@ export default {
 
     if (data) {
       this.found = true
-      this.categorys = data.categorys
-      this.products = data.products
+      if (data.meta.model === 'SubCategory') {
+        this.component = 'SubCategoryPage'
+      }
       this.meta = data.meta
-      this.name = data.name
+      this.data = data
     }
     return data
   },
   data() {
     return {
       found: false,
-      categorys: [],
-      products: [],
+      data: {},
+      component: '',
       meta: {},
       name: ''
     }
