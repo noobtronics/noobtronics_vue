@@ -4,7 +4,7 @@
     <section class="section fullwidthmobilesection shoppagesection">
       <div class="container fullwdithcontainer">
         <div v-if="!found">
-          <Error404 />
+          <Error404 name="Category" />
         </div>
         <div v-else>
           <h1 class="c">{{ meta.h1 }}</h1>
