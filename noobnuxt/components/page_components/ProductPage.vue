@@ -81,8 +81,8 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="">
-              <nav class="level is-mobile" id="prodlevel">
+            <div class="">
+              <nav id="prodlevel" class="level is-mobile">
                 <div class="level-item">
                   <div class="level-item">
                     <p
@@ -90,9 +90,10 @@
                       style="width:12rem;text-align:center;"
                     >
                       Price:
-                      <strong id="productprice" v-html="selected_variant.price"
-                        >₹{{variants.0.price}}</strong
-                      >
+                      <strong
+                        id="productprice"
+                        v-html="selected_variant.price"
+                      ></strong>
                     </p>
                   </div>
                 </div>
@@ -106,20 +107,18 @@
               </nav>
             </div>
 
-<div class="content delinfo">
+            <div class="content delinfo">
               <p>
                 Ships from India. All India Delivery <br />(3-4 days for metros)
               </p>
               <nav class="level is-mobile">
                 <p
-                  class="level-item"
                   id="product_in_stock"
+                  class="level-item"
                   v-html="selected_variant.stock"
-                >
-                </p>
+                ></p>
               </nav>
             </div>
--->
           </div>
         </div>
       </div>
@@ -161,6 +160,8 @@ export default {
   },
   created: function() {
     this.change_image_by_id(this.data.images.mainimage.id)
+    this.selected_variant.stock = this.data.variants[0].stock
+    this.selected_variant.price = this.data.variants[0].price
   },
   methods: {
     change_image_by_id: function(id) {
@@ -174,11 +175,8 @@ export default {
 
       this.mainimage = html
     },
-    change_image: function(event) {
-      this.change_image_by_id(event.target.id)
-    },
-    change_variant: function(event) {
-      const variant = this.variants[event.target.id]
+    change_variant: function(id) {
+      const variant = this.data.variants_dic[id]
       this.selected_variant.id = variant.id
       this.selected_variant.price = '₹' + variant.price
       this.selected_variant.stock = variant.stock
