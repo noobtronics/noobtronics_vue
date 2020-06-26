@@ -127,9 +127,7 @@
     <section class="hero prodblog">
       <div class="hero-body">
         <div class="container">
-          <div class="content">
-            <!-- {{ html | safe }} -->
-          </div>
+          <div class="content" v-html="data.meta.html"></div>
         </div>
       </div>
     </section>
@@ -181,6 +179,16 @@ export default {
       this.selected_variant.price = '₹' + variant.price
       this.selected_variant.stock = variant.stock
       this.change_image_by_id(variant.image)
+    }
+  },
+  head() {
+    return {
+      style: [
+        {
+          cssText: ``,
+          type: 'text/css'
+        }
+      ]
     }
   }
 }
