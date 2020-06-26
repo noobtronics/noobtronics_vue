@@ -10,7 +10,7 @@
           <figure
             class="image"
             style="object-fit: cover; cursor:pointer;"
-            @click="window.location.href = '/' + prod.slug"
+            @click="$router.push('/' + prod.slug)"
           >
             <picture>
               <source :data-srcset="prod.thumb.webp" type="image/webp" />
@@ -37,9 +37,9 @@
         </div>
         <div class="footerblock">
           <footer class="card-footer">
-            <a :href="'/' + prod.slug"
-              ><p class="cardhead">{{ prod.cardname }}</p></a
-            >
+            <nuxt-link :to="'/' + prod.slug"
+              ><p class="cardhead">{{ prod.cardname }}</p>
+            </nuxt-link>
           </footer>
 
           <footer class="card-footer">
