@@ -41,39 +41,37 @@
                   :key="prod.slug + prod.cardtitle"
                   class="column horizontalprodcolumn"
                 >
-                  <a :href="'/' + prod.slug">
-                    <div class="card" style="height: 100%">
-                      <div class="card-image">
-                        <figure class="image" style="object-fit: cover;">
-                          <picture>
-                            <source
-                              :srcset="prod.thumb.webp"
-                              type="image/webp"
-                            />
-                            <source
-                              :srcset="prod.thumb.jpg"
-                              type="image/jpeg"
-                            />
-                            <img
-                              :src="prod.thumb.jpg"
-                              :alt="prod.thumb.alt"
-                              width="150"
-                              height="150"
-                              loading="lazy"
-                            />
-                          </picture>
-                        </figure>
-                      </div>
-                      <div class="footerblock">
-                        <footer class="card-footer">
-                          <p class="cardhead">{{ prod.cardname }}</p>
-                        </footer>
-                        <footer class="card-footer">
-                          <p class="cardsubtitle">{{ prod.cardtitle }}</p>
-                        </footer>
-                      </div>
+                  <div
+                    class="card"
+                    style="height: 100%"
+                    @click="$router.push('/' + prod.slug)"
+                  >
+                    <div class="card-image">
+                      <figure class="image" style="object-fit: cover;">
+                        <picture>
+                          <source :srcset="prod.thumb.webp" type="image/webp" />
+                          <source :srcset="prod.thumb.jpg" type="image/jpeg" />
+                          <img
+                            :src="prod.thumb.jpg"
+                            :alt="prod.thumb.alt"
+                            width="150"
+                            height="150"
+                            loading="lazy"
+                          />
+                        </picture>
+                      </figure>
                     </div>
-                  </a>
+                    <div class="footerblock">
+                      <footer class="card-footer">
+                        <nuxt-link :to="'/' + prod.slug" class="cardhead">{{
+                          prod.cardname
+                        }}</nuxt-link>
+                      </footer>
+                      <footer class="card-footer">
+                        <p class="cardsubtitle">{{ prod.cardtitle }}</p>
+                      </footer>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
