@@ -7,7 +7,7 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -18,23 +18,18 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    "~assets/sass/main.sass",
-  ],
+  css: ['~assets/sass/main.sass'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '@/plugins/lazysizes.js',
-    '@/plugins/raise404.js'
-  ],
+  plugins: ['@/plugins/lazysizes.js', '@/plugins/raise404.js'],
 
   styleResources: {
-     sass: [
-       "node_modules/bulma/sass/utilities/_all.sass",
-       "~assets/sass/mobile-mixin.sass",
-     ],
-   },
+    sass: [
+      'node_modules/bulma/sass/utilities/_all.sass',
+      '~assets/sass/mobile-mixin.sass'
+    ]
+  },
   /*
    ** Nuxt.js dev-modules
    */
@@ -59,12 +54,15 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-   axios: {
-     proxy: true,
-   },
-   proxy: {
-     '/api/': { target: 'http://localhost:8000/api', pathRewrite: { '^/api/': '' } },
-   },
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://localhost:8000/api',
+      pathRewrite: { '^/api/': '' }
+    }
+  },
   /*
    ** Build configuration
    */
@@ -78,6 +76,18 @@ export default {
     },
 
     extractCSS: true,
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true
+          }
+        }
+      }
+    },
     /*
      ** You can extend webpack config here
      */
@@ -86,7 +96,17 @@ export default {
   render: {
     bundleRenderer: {
       shouldPreload: (file, type) => {
-        return ['script', 'style', 'font'].includes(type)
+        if (type === 'script' || type === 'style') {
+          return true
+        }
+      }
+    },
+    http2: {
+      push: true,
+      pushAssets: (req, res, publicPath, preloadFiles) => {
+        return preloadFiles.map(
+          (f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`
+        )
       }
     }
   }
