@@ -57,7 +57,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/amp',
     'nuxt-custom-headers',
     '~/modules/async_css.js'
   ],

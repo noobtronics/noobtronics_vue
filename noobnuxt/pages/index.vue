@@ -265,7 +265,8 @@ export default {
           cssText: `.columns{margin:0;padding:0;}.column{margin:0;padding:0;}`,
           type: 'text/css'
         }
-      ]
+      ],
+      __dangerouslyDisableSanitizers: ['script', 'style']
     }
   }
 }

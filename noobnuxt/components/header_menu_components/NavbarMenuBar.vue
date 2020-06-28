@@ -11,7 +11,7 @@
         <a class="navbar-link" @click="is_shop = !is_shop">
           Shop
         </a>
-        <div class="navbar-dropdown ">
+        <div class="navbar-dropdown">
           <nuxt-link class="navbar-item" to="/shop">All Products</nuxt-link>
           <nuxt-link class="navbar-item" to="/shop/microcontrollers">
             Microcontrollers
@@ -63,7 +63,6 @@
         </div>
       </div>
     </div>
-
     <div class="navbar-end is-hidden-mobile">
       <div class="navbar-item">
         <div class="field is-grouped">
@@ -104,7 +103,7 @@
 <script>
 export default {
   name: 'NavbarMenuBar',
-  data: () => {
+  data: function() {
     return {
       is_shop: false,
       is_blog: false,
@@ -123,4 +122,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="sass"></style>
+<style lang="sass"></style>
