@@ -1,6 +1,5 @@
 <template>
   <div class="container fullwdithcontainer">
-    <HeaderMenu />
     <section class="section fullwidthmobilesection shoppagesection">
       <div class="container fullwdithcontainer">
         <div v-if="!found">
@@ -31,25 +30,15 @@
         </div>
       </div>
     </section>
-
-    <hr />
-    <SubscribeEmail />
-    <Footer />
   </div>
 </template>
 
 <script>
-import HeaderMenu from '~/components/HeaderMenu.vue'
 import Error404 from '~/components/error/Error404.vue'
-import Footer from '~/components/Footer.vue'
-import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
 import ProductCards from '~/components/shop_components/ProductCards.vue'
 
 export default {
   components: {
-    HeaderMenu,
-    Footer,
-    SubscribeEmail,
     Error404,
     ProductCards
   },

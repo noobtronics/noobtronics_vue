@@ -1,31 +1,20 @@
 <template>
   <div class="container fullwdithcontainer">
-    <HeaderMenu />
     <div v-if="!found">
       <Error404 />
     </div>
     <div v-else>
       <component :is="component" :data="data" />
     </div>
-    <hr />
-    <SubscribeEmail />
-    <Footer />
   </div>
 </template>
 
 <script>
-import HeaderMenu from '~/components/HeaderMenu.vue'
 import Error404 from '~/components/error/Error404.vue'
-import Footer from '~/components/Footer.vue'
-import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
-
 import SubCategoryPage from '~/components/page_components/SubCategoryPage.vue'
 
 export default {
   components: {
-    HeaderMenu,
-    Footer,
-    SubscribeEmail,
     Error404,
     SubCategoryPage
   },

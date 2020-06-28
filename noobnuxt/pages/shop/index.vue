@@ -1,7 +1,5 @@
 <template>
   <div class="container fullwdithcontainer">
-    <HeaderMenu />
-
     <section class="section fullwidthmobilesection shoppagesection">
       <div class="container fullwdithcontainer">
         <h1 class="c">{{ meta.h1 }}</h1>
@@ -25,24 +23,14 @@
         <ProductCards :products="products" />
       </div>
     </section>
-
-    <hr />
-    <SubscribeEmail />
-    <Footer />
   </div>
 </template>
 
 <script>
-import HeaderMenu from '~/components/HeaderMenu.vue'
-import Footer from '~/components/Footer.vue'
-import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
 import ProductCards from '~/components/shop_components/ProductCards.vue'
 
 export default {
   components: {
-    HeaderMenu,
-    Footer,
-    SubscribeEmail,
     ProductCards
   },
   async fetch() {

@@ -1,6 +1,5 @@
 <template>
   <div class="container fullwdithcontainer">
-    <HeaderMenu />
     <section class="hero">
       <div class="hero-body" style="padding: 1.5rem;">
         <div class="container has-text-centered">
@@ -189,22 +188,12 @@
         <hr />
       </div>
     </section>
-    <SubscribeEmail />
-    <Footer />
   </div>
 </template>
 
 <script>
-import HeaderMenu from '~/components/HeaderMenu.vue'
-import Footer from '~/components/Footer.vue'
-import SubscribeEmail from '~/components/forms/SubscribeEmail.vue'
-
 export default {
-  components: {
-    HeaderMenu,
-    Footer,
-    SubscribeEmail
-  },
+  components: {},
   async fetch() {
     this.data = await this.$axios.$post('/api/static/homepage', {
       useCache: true
