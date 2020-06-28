@@ -1,3 +1,7 @@
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
+const util = require('util')
+
 export default {
   mode: 'universal',
   /*
@@ -9,7 +13,15 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      {
+        innerHTML: `(function(w) {var loadCSS = function(href, before, media) {        var doc = w.document;        var ss = doc.createElement('link');        var ref;        if(before) {            ref = before;        } else {            var refs = (doc.body || doc.getElementsByTagName('head')[0]).childNodes;            ref = refs[refs.length - 1];        }        var sheets = doc.styleSheets;        ss.rel = 'stylesheet';        ss.href = href;        ss.media = 'only x';        function ready(cb) {            if(doc.body) {                return cb();            }            setTimeout(function() {                ready(cb);            });        }        ready(function() {            ref.parentNode.insertBefore(ss, (before ? ref : ref.nextSibling));        });        var onloadcssdefined = function(cb) {            var resolvedHref = ss.href;            var i = sheets.length;            while(i--) {                if(sheets[i].href === resolvedHref) {                    return cb();                }            }            setTimeout(function() {                onloadcssdefined(cb);            });        };        function loadCB() {            if(ss.addEventListener) {                ss.removeEventListener('load', loadCB);            }            ss.media = media || 'all';        }        if(ss.addEventListener) {            ss.addEventListener('load', loadCB);        }        ss.onloadcssdefined = onloadcssdefined;        onloadcssdefined(loadCB);        return ss;    };    if(typeof exports !== 'undefined') {        exports.loadCSS = loadCSS;    } else {        w.loadCSS = loadCSS;    }}(typeof global !== 'undefined' ? global : this));`,
+        type: 'text/javascript'
+
+      }
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
   /*
    ** Customize the progress-bar color
@@ -18,17 +30,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['~assets/sass/main.sass'],
+  css: [],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: ['@/plugins/lazysizes.js', '@/plugins/raise404.js'],
 
   styleResources: {
-    sass: [
-      'node_modules/bulma/sass/utilities/_all.sass',
-      '~assets/sass/mobile-mixin.sass'
-    ]
+    sass: ['~assets/sass/mobile-mixin.sass']
   },
   /*
    ** Nuxt.js dev-modules
@@ -45,15 +54,12 @@ export default {
    */
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    '@nuxtjs/bulma',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-
-    ['@nuxtjs/component-cache', {
-      max: 10000,
-      maxAge: 1000 * 60 * 60
-    }]
+    '@nuxtjs/amp',
+    'nuxt-custom-headers',
+    '~/modules/async_css.js'
   ],
   /*
    ** Axios module configuration
@@ -68,6 +74,7 @@ export default {
       pathRewrite: { '^/api/': '' }
     }
   },
+
   /*
    ** Build configuration
    */
@@ -86,17 +93,33 @@ export default {
         cacheGroups: {
           styles: {
             name: 'styles',
-            test: /\.(css|vue)$/,
+            test: /\.css$/,
             chunks: 'all',
             enforce: true
           }
         }
       }
     },
+
+    optimization: {
+      minimize: process.env.NODE_ENV === 'production',
+      minimizer: [
+        new TerserJSPlugin({}),
+        new OptimizeCSSAssetsPlugin({
+          cssProcessor: require('cssnano'),
+          cssProcessorPluginOptions: {
+            preset: ['default', { discardComments: { removeAll: true } }]
+          },
+          canPrint: true
+        })
+      ]
+    },
+
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, { isDev, isClient }) {
+    }
   },
   render: {
     bundleRenderer: {
@@ -109,7 +132,7 @@ export default {
     http2: {
       push: true,
       pushAssets: (req, res, publicPath, preloadFiles) => {
-        return preloadFiles.map(
+        return preloadFiles.filter(f => f.asType === 'script').map(
           (f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`
         )
       }
