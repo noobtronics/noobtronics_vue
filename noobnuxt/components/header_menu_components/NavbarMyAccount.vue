@@ -2,7 +2,7 @@
   <div
     id="navAccount"
     class="navbar-menu is-hidden-desktop"
-    :class="{ 'is-active': is_active }"
+    :class="{ 'is-active': isAccountMenuActive }"
   >
     <div class="navbar-start">
       <a class="navbar-item" href="https://bulma.io/">
@@ -23,15 +23,18 @@
 
 <script>
 export default {
-  name: 'NavbarMyAccount',
-  data: () => {
+  props: {
+    isAccountMenuActive: {
+      type: Boolean,
+      default: function() {
+        return false
+      }
+    }
+  },
+  data: function() {
     return {}
   },
-  computed: {
-    is_active: function() {
-      return this.$store.state.navbar.AccountBar
-    }
-  }
+  computed: {}
 }
 </script>
 

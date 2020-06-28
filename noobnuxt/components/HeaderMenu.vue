@@ -8,7 +8,7 @@
             role="button"
             aria-label="menu"
             aria-expanded="false"
-            :class="{ 'is-active': is_MenuBaractive }"
+            :class="{ 'is-active': isMenuBarActive }"
             @click="toggleMenuBar"
           >
             <span aria-hidden="true"></span>
@@ -136,13 +136,13 @@
           </a>
         </div>
 
-        <NavbarMenuBar />
+        <NavbarMenuBar :isMenuBarActive="isMenuBarActive" />
 
-        <NavbarSearchBar />
+        <NavbarSearchBar :isSearchMenuActive="isSearchMenuActive" />
 
-        <NavbarMyAccount />
+        <NavbarMyAccount :isAccountMenuActive="isAccountMenuActive" />
 
-        <NavbarCart />
+        <NavbarCart :isCartMenu="isCartMenu" />
       </div>
     </nav>
 
@@ -183,8 +183,6 @@ import NavbarMyAccount from './header_menu_components/NavbarMyAccount.vue'
 import NavbarCart from './header_menu_components/NavbarCart.vue'
 
 export default {
-  name: 'HeaderMenu',
-
   components: {
     NavbarMenuBar,
     NavbarSearchBar,
@@ -192,29 +190,37 @@ export default {
     NavbarMyAccount
   },
 
-  data: () => ({}),
+  data: function() {
+    return {
+      isMenuBarActive: false,
+      isCartMenu: false,
+      isAccountMenuActive: false,
+      isSearchMenuActive: false
+    }
+  },
 
   computed: {
-    is_MenuBaractive: function() {
-      return this.$store.state.navbar.MenuBar
-    },
     cart_count: function() {
       return this.$store.state.cart.cart_count
     }
   },
-
+  watch: {
+    $route(to, from) {
+      this.isMenuBarActive = false
+    }
+  },
   methods: {
     toggleMenuBar: function() {
-      this.$store.commit('navbar_toggleMenuBar')
+      this.isMenuBarActive = !this.isMenuBarActive
     },
     toggleSearchBar: function() {
-      this.$store.commit('navbar_toggleSearchBar')
+      this.isSearchMenuActive = !this.isSearchMenuActive
     },
     toggleCartBar: function() {
-      this.$store.commit('navbar_toggleCartBar')
+      this.isCartMenu = !this.isCartMenu
     },
     toggleAccountBar: function() {
-      this.$store.commit('navbar_toggleAccountBar')
+      this.isAccountMenuActive = !this.isAccountMenuActive
     }
   }
 }

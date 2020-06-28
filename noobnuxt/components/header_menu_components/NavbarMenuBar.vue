@@ -1,16 +1,14 @@
 <template>
-  <div class="navbar-menu" :class="{ 'is-active': is_bar_active }">
+  <div class="navbar-menu" :class="{ 'is-active': isMenuBarActive }">
     <div class="navbar-start">
       <nuxt-link class="navbar-item" to="/">
         Home
       </nuxt-link>
       <div
         class="navbar-item has-dropdown is-hoverable"
-        :class="{ 'is-active': is_shop }"
+        :class="{ 'is-active': isShop }"
       >
-        <a class="navbar-link" @click="is_shop = !is_shop">
-          Shop
-        </a>
+        <a class="navbar-link" @click="toggleShop()">Shop</a>
         <div class="navbar-dropdown">
           <nuxt-link class="navbar-item" to="/shop">All Products</nuxt-link>
           <nuxt-link class="navbar-item" to="/shop/microcontrollers">
@@ -26,9 +24,9 @@
       </div>
       <div
         class="navbar-item has-dropdown is-hoverable"
-        :class="{ 'is-active': is_blog }"
+        :class="{ 'is-active': isBlog }"
       >
-        <a class="navbar-link" @click="is_blog = !is_blog">
+        <a class="navbar-link" @click="isBlog = !isBlog">
           Blog
         </a>
         <div class="navbar-dropdown ">
@@ -45,9 +43,9 @@
       </div>
       <div
         class="navbar-item has-dropdown is-hoverable"
-        :class="{ 'is-active': is_info }"
+        :class="{ 'is-active': isInfo }"
       >
-        <a class="navbar-link" @click="is_info = !is_info">
+        <a class="navbar-link" @click="isInfo = !isInfo">
           Information
         </a>
         <div class="navbar-dropdown ">
@@ -102,20 +100,29 @@
 
 <script>
 export default {
-  name: 'NavbarMenuBar',
+  props: {
+    isMenuBarActive: {
+      type: Boolean,
+      default: function() {
+        return false
+      }
+    }
+  },
   data: function() {
     return {
-      is_shop: false,
-      is_blog: false,
-      is_info: false
+      isShop: false,
+      isBlog: false,
+      isInfo: false
     }
   },
   computed: {
-    is_bar_active: function() {
-      return this.$store.state.navbar.MenuBar
-    },
     cart_count: function() {
       return this.$store.state.cart.cart_count
+    }
+  },
+  methods: {
+    toggleShop: function() {
+      this.isShop = !this.isShop
     }
   }
 }

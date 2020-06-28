@@ -2,7 +2,7 @@
   <div
     id="navCart"
     class="navbar-menu is-hidden-desktop"
-    :class="{ 'is-active': is_active }"
+    :class="{ 'is-active': isCartMenu }"
   >
     <div class="navbar-start">
       <p class="content">Your Cart is Empty</p>
@@ -12,15 +12,18 @@
 
 <script>
 export default {
-  name: 'NavbarCart',
-  data: () => {
+  props: {
+    isCartMenu: {
+      type: Boolean,
+      default: function() {
+        return false
+      }
+    }
+  },
+  data: function() {
     return {}
   },
-  computed: {
-    is_active: function() {
-      return this.$store.state.navbar.CartBar
-    }
-  }
+  computed: {}
 }
 </script>
 

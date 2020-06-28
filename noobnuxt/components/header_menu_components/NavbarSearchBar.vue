@@ -2,7 +2,7 @@
   <div
     id="navSearch"
     class="navbar-menu is-hidden-desktop"
-    :class="{ 'is-active': is_active }"
+    :class="{ 'is-active': isSearchMenuActive }"
   >
     <div class="field has-addons" style="padding: 5px;">
       <div class="control is-expanded">
@@ -24,15 +24,18 @@
 
 <script>
 export default {
-  name: 'SearchBar',
-  data: () => {
+  props: {
+    isSearchMenuActive: {
+      type: Boolean,
+      default: function() {
+        return false
+      }
+    }
+  },
+  data: function() {
     return {}
   },
-  computed: {
-    is_active: function() {
-      return this.$store.state.navbar.SearchBar
-    }
-  }
+  computed: {}
 }
 </script>
 
