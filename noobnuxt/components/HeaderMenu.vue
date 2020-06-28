@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav id="headermenu-app" class="navbar is-fixed-top is-dark">
-      <div class="container">
+      <div class="container" style="overflow:hidden;width:100%;">
         <div class="navbar-brand is-active ">
           <a
             class="navbar-burger left-burger mobiledashes"
@@ -221,6 +221,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import '~assets/sass/main.sass'
 
 .navbar-logo
   width: 13rem
@@ -304,4 +305,7 @@ export default {
 
   #navbartabs
     font-size: 18px
+
++iphone_five
+  width: 10rem
 </style>
