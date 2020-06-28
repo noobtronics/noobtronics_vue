@@ -21,5 +21,6 @@ module.exports = {
   rules: {
     "object-shorthand": 0,
     'vue/no-v-html': 0,
+    "vue/attribute-hyphenation": 0
   }
 }
