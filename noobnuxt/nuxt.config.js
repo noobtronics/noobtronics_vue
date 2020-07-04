@@ -4,6 +4,7 @@ const util = require('util')
 
 export default {
   mode: 'universal',
+  target: 'static',
   /*
    ** Headers of the page
    */
@@ -57,7 +58,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    'nuxt-custom-headers',
     '~/modules/async_css.js'
   ],
   /*
@@ -65,13 +65,9 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    proxy: true
-  },
-  proxy: {
-    '/api/': {
-      target: 'http://localhost:8000/api',
-      pathRewrite: { '^/api/': '' }
-    }
+    host: 'api.noobtronics.in',
+    port: 443,
+    https: true,
   },
 
   /*
