@@ -1,16 +1,23 @@
-const cheerio = require('cheerio');
+const cheerio = require('cheerio')
 
-export default function asyncCSS () {
+function finalize_html(html) {
+  let $ = cheerio.load(html)
+  let command = ''
+  $(`head link[rel="stylesheet"]`).each(function () {
+    command += "loadCSS('" + $(this).attr('href') + "');"
+  })
+  $(`head link[rel="stylesheet"]`).remove()
+  $(`body`).append(`<script>` + command + `</script>`)
+  html = $.html()
+  return html
+}
 
+export default function asyncCSS() {
   this.nuxt.hook('render:route', (url, result, context) => {
-    let $ = cheerio.load(result.html)
-    let command = ""
-    $(`head link[rel="stylesheet"]`).each(function(){
-      command += "loadCSS('"+$(this).attr('href')+"');"
-    })
-    $(`head link[rel="stylesheet"]`).remove()
-    $(`head`).append(`<script>`+command+`</script>`)
-    result.html = $.html()
+    result.html = finalize_html(result.html)
   })
 
+  this.nuxt.hook('export:page', (page, errors) => {
+    page.page.html = finalize_html(page.page.html)
+  })
 }
