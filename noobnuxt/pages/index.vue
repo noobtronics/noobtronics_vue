@@ -195,7 +195,7 @@
 export default {
   components: {},
   async fetch() {
-    this.data = await this.$axios.$post('/api/static/homepage', {
+    this.data = await this.$axios.$post('api/static/homepage', {
       useCache: true
     })
     this.catalog = this.data.catalog
@@ -224,9 +224,6 @@ export default {
       // return true
     }
   },
-  httpHeaders: () => ({
-    pagepreload: `</storage/home/first-made-in-india-arduino.jpg>; rel=preload; as=image`
-  }),
   head() {
     let styles = []
     if (process.server) {

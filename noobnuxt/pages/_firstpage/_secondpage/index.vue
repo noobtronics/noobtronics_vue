@@ -23,7 +23,7 @@ export default {
     this.found = true
 
     const data = await this.$axios
-      .$post('/api/static/secondpage', {
+      .$post('api/static/secondpage', {
         slug:
           '/' +
           this.$route.params.firstpage +

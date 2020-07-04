@@ -47,7 +47,7 @@ export default {
     this.found = true
 
     const data = await this.$axios
-      .$post('/api/static/shoppage', {
+      .$post('api/static/shoppage', {
         slug: '/shop/' + this.$route.params.category
       })
       .catch(() => {
