@@ -13,7 +13,9 @@
               <figure class="image">
                 <img
                   class="lazyload"
-                  data-src="/storage/home/first-made-in-india-arduino.jpg"
+                  data-src="
+                    https://cdn.noobtronics.in/storage/home/first-made-in-india-arduino.jpg
+                  "
                   src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                   style="z-index: 1; position: absolute;"
                   alt="made in india arduino"

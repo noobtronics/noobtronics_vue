@@ -5,6 +5,7 @@ const util = require('util')
 export default {
   mode: 'universal',
   target: 'static',
+
   /*
    ** Headers of the page
    */
@@ -48,7 +49,7 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/style-resources',
     // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module'
+    '@nuxtjs/stylelint-module',
   ],
   /*
    ** Nuxt.js modules
@@ -86,6 +87,9 @@ export default {
     host: 'api.noobtronics.in',
     port: 443,
     https: true,
+  },
+  env: {
+    cdnURL: 'https://cdn.noobtronics.in'
   },
 
   /*
