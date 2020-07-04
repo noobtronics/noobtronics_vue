@@ -16,7 +16,7 @@ import ProductPage from '~/components/page_components/ProductPage.vue'
 export default {
   components: {
     Error404,
-    ProductPage
+    ProductPage,
   },
   async fetch() {
     const that = this
@@ -28,7 +28,7 @@ export default {
           '/' +
           this.$route.params.firstpage +
           '/' +
-          this.$route.params.secondpage
+          this.$route.params.secondpage,
       })
       .catch(() => {
         that.found = false
@@ -51,27 +51,9 @@ export default {
       data: {},
       component: '',
       meta: {},
-      name: ''
+      name: '',
     }
   },
-  computed: {
-    categoryH2: function() {
-      const nameList = []
-      for (const i of this.categorys) {
-        let name = i.name
-        name = name.replace(this.name, '')
-        nameList.push(name.trim())
-      }
-      return nameList.join(', ') + ' ' + this.name
-    }
-  },
-  activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
-      this.$fetch()
-    }
-  },
-  methods: {},
-  fetchOnServer: true,
   head() {
     return {
       title: this.meta.title,
@@ -80,18 +62,39 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.meta.description
+          content: this.meta.description,
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: this.meta.keywords
+          content: this.meta.keywords,
         },
-        { name: 'viewporttest', content: 'width=device-width, initial-scale=1' }
+        {
+          name: 'viewporttest',
+          content: 'width=device-width, initial-scale=1',
+        },
       ],
-      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }]
+      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }],
     }
-  }
+  },
+  computed: {
+    categoryH2: function () {
+      const nameList = []
+      for (const i of this.categorys) {
+        let name = i.name
+        name = name.replace(this.name, '')
+        nameList.push(name.trim())
+      }
+      return nameList.join(', ') + ' ' + this.name
+    },
+  },
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
+      this.$fetch()
+    }
+  },
+  methods: {},
+  fetchOnServer: true,
 }
 </script>
 

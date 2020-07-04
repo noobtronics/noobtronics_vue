@@ -29,7 +29,7 @@
         <a class="navbar-link" @click="isBlog = !isBlog">
           Blog
         </a>
-        <div class="navbar-dropdown ">
+        <div class="navbar-dropdown">
           <nuxt-link class="navbar-item" to="/blog">
             Blog Home
           </nuxt-link>
@@ -48,7 +48,7 @@
         <a class="navbar-link" @click="isInfo = !isInfo">
           Information
         </a>
-        <div class="navbar-dropdown ">
+        <div class="navbar-dropdown">
           <nuxt-link class="navbar-item" to="/about-us">
             About Us
           </nuxt-link>
@@ -65,7 +65,7 @@
       <div class="navbar-item">
         <div class="field is-grouped">
           <p class="control">
-            <a class="bd-tw-button button ">
+            <a class="bd-tw-button button">
               <span class="icon">
                 <img
                   alt="store icon"
@@ -103,28 +103,28 @@ export default {
   props: {
     isMenuBarActive: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false
-      }
-    }
+      },
+    },
   },
-  data: function() {
+  data: function () {
     return {
       isShop: false,
       isBlog: false,
-      isInfo: false
+      isInfo: false,
     }
   },
   computed: {
-    cart_count: function() {
+    cart_count: function () {
       return this.$store.state.cart.cart_count
-    }
+    },
   },
   methods: {
-    toggleShop: function() {
+    toggleShop: function () {
       this.isShop = !this.isShop
-    }
-  }
+    },
+  },
 }
 </script>
 

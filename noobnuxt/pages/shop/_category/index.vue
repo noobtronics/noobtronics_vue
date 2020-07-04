@@ -16,7 +16,7 @@
             <nuxt-link
               v-for="cat in categorys"
               :key="cat.name"
-              class="button  is-medium is-active"
+              class="button is-medium is-active"
               :to="'/' + cat.slug"
             >
               {{ cat.name }}
@@ -40,7 +40,7 @@ import ProductCards from '~/components/shop_components/ProductCards.vue'
 export default {
   components: {
     Error404,
-    ProductCards
+    ProductCards,
   },
   async fetch() {
     const that = this
@@ -48,7 +48,7 @@ export default {
 
     const data = await this.$axios
       .$post('api/static/shoppage', {
-        slug: '/shop/' + this.$route.params.category
+        slug: '/shop/' + this.$route.params.category,
       })
       .catch(() => {
         that.found = false
@@ -70,27 +70,9 @@ export default {
       categorys: [],
       products: [],
       meta: {},
-      name: ''
+      name: '',
     }
   },
-  computed: {
-    categoryH2: function() {
-      const nameList = []
-      for (const i of this.categorys) {
-        let name = i.name
-        name = name.replace(this.name, '')
-        nameList.push(name.trim())
-      }
-      return nameList.join(', ') + ' ' + this.name
-    }
-  },
-  activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
-      this.$fetch()
-    }
-  },
-  methods: {},
-  fetchOnServer: true,
   head() {
     return {
       title: this.meta.title,
@@ -99,18 +81,39 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.meta.description
+          content: this.meta.description,
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: this.meta.keywords
+          content: this.meta.keywords,
         },
-        { name: 'viewporttest', content: 'width=device-width, initial-scale=1' }
+        {
+          name: 'viewporttest',
+          content: 'width=device-width, initial-scale=1',
+        },
       ],
-      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }]
+      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }],
     }
-  }
+  },
+  computed: {
+    categoryH2: function () {
+      const nameList = []
+      for (const i of this.categorys) {
+        let name = i.name
+        name = name.replace(this.name, '')
+        nameList.push(name.trim())
+      }
+      return nameList.join(', ') + ' ' + this.name
+    },
+  },
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
+      this.$fetch()
+    }
+  },
+  methods: {},
+  fetchOnServer: true,
 }
 </script>
 

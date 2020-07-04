@@ -16,11 +16,11 @@ export default {
   props: {
     name: {
       type: String,
-      default: function() {
+      default: function () {
         return ''
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

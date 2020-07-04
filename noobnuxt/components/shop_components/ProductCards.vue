@@ -9,7 +9,7 @@
         <div class="card-image">
           <figure
             class="image"
-            style="object-fit: cover; cursor:pointer;"
+            style="object-fit: cover; cursor: pointer;"
             @click="$router.push('/' + prod.slug)"
           >
             <picture>
@@ -70,11 +70,11 @@ export default {
   props: {
     products: {
       type: Array,
-      default: function() {
+      default: function () {
         return []
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

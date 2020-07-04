@@ -17,8 +17,8 @@ export default {
   components: {
     HeaderMenu,
     Footer,
-    SubscribeEmail
-  }
+    SubscribeEmail,
+  },
 }
 </script>
 

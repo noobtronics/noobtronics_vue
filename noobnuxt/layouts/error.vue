@@ -3,7 +3,7 @@
     <HeaderMenu />
     <div
       class="content has-text-centered"
-      style="height: 400px;padding: 100px 0px;"
+      style="height: 400px; padding: 100px 0px;"
     >
       <h1>An error occurred</h1>
       <nuxt-link to="/">Home page</nuxt-link>
@@ -19,8 +19,8 @@ import Footer from '~/components/Footer.vue'
 export default {
   components: {
     HeaderMenu,
-    Footer
+    Footer,
   },
-  layout: 'blog' // you can set a custom layout for the error page
+  layout: 'blog', // you can set a custom layout for the error page
 }
 </script>

@@ -25,7 +25,7 @@
       <div class="columns prodpagecolumns">
         <div class="column">
           <div class="container has-text-centered">
-            <div class="columns is-mobile  prodmainphoto">
+            <div class="columns is-mobile prodmainphoto">
               <div class="column is-3 showcasecolumn">
                 <figure
                   v-for="(v, i) in data.images.data"
@@ -70,7 +70,7 @@
                         :key="v.id"
                         class="variantbutton button is-link is-inverted is-outlined"
                         :class="{
-                          'is-focused': selected_variant.id == v.id
+                          'is-focused': selected_variant.id == v.id,
                         }"
                         :disabled="v.is_disabled === 'disabled'"
                         @click="change_variant(v.id)"
@@ -87,7 +87,7 @@
                   <div class="level-item">
                     <p
                       class="subtitle is-4"
-                      style="width:12rem;text-align:center;"
+                      style="width: 12rem; text-align: center;"
                     >
                       Price:
                       <strong
@@ -139,12 +139,12 @@ export default {
   props: {
     data: {
       type: Object,
-      default: function() {
+      default: function () {
         return {}
-      }
-    }
+      },
+    },
   },
-  data: function() {
+  data: function () {
     return {
       mainimage: '',
       // "images": JSON.parse(document.getElementById('prod_images_json').textContent),
@@ -152,17 +152,27 @@ export default {
       selected_variant: {
         id: '',
         stock: '',
-        price: ''
-      }
+        price: '',
+      },
     }
   },
-  created: function() {
+  head() {
+    return {
+      style: [
+        {
+          cssText: ``,
+          type: 'text/css',
+        },
+      ],
+    }
+  },
+  created: function () {
     this.change_image_by_id(this.data.images.mainimage.id)
     this.selected_variant.stock = this.data.variants[0].stock
     this.selected_variant.price = this.data.variants[0].price
   },
   methods: {
-    change_image_by_id: function(id) {
+    change_image_by_id: function (id) {
       const img = this.data.images.data[id]
       const html = `
       <picture>
@@ -173,24 +183,14 @@ export default {
 
       this.mainimage = html
     },
-    change_variant: function(id) {
+    change_variant: function (id) {
       const variant = this.data.variants_dic[id]
       this.selected_variant.id = variant.id
       this.selected_variant.price = '₹' + variant.price
       this.selected_variant.stock = variant.stock
       this.change_image_by_id(variant.image)
-    }
+    },
   },
-  head() {
-    return {
-      style: [
-        {
-          cssText: ``,
-          type: 'text/css'
-        }
-      ]
-    }
-  }
 }
 </script>
 

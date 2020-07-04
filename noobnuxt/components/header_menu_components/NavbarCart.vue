@@ -15,15 +15,15 @@ export default {
   props: {
     isCartMenu: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false
-      }
-    }
+      },
+    },
   },
-  data: function() {
+  data: function () {
     return {}
   },
-  computed: {}
+  computed: {},
 }
 </script>
 

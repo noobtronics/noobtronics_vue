@@ -16,16 +16,16 @@ import ProductCards from '~/components/shop_components/ProductCards.vue'
 
 export default {
   components: {
-    ProductCards
+    ProductCards,
   },
   props: {
     data: {
       type: Object,
-      default: function() {
+      default: function () {
         return {}
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 

@@ -12,7 +12,7 @@
           <nuxt-link
             v-for="cat in categorys"
             :key="cat.name"
-            class="button  is-medium is-active"
+            class="button is-medium is-active"
             :to="'/shop/' + cat.slug"
           >
             {{ cat.name }}
@@ -31,11 +31,11 @@ import ProductCards from '~/components/shop_components/ProductCards.vue'
 
 export default {
   components: {
-    ProductCards
+    ProductCards,
   },
   async fetch() {
     this.data = await this.$axios.$post('api/static/shoppage', {
-      slug: '/shop'
+      slug: '/shop',
     })
     this.categorys = this.data.categorys
     this.products = this.data.products
@@ -48,15 +48,9 @@ export default {
       categorys: [],
       products: [],
       meta: {},
-      name: ''
+      name: '',
     }
   },
-  activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
-      this.$fetch()
-    }
-  },
-  methods: {},
   head() {
     return {
       title: this.meta.title,
@@ -65,18 +59,27 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: this.meta.description
+          content: this.meta.description,
         },
         {
           hid: 'keywords',
           name: 'keywords',
-          content: this.meta.keywords
+          content: this.meta.keywords,
         },
-        { name: 'viewporttest', content: 'width=device-width, initial-scale=1' }
+        {
+          name: 'viewporttest',
+          content: 'width=device-width, initial-scale=1',
+        },
       ],
-      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }]
+      link: [{ rel: 'canonical', href: 'https://noobtronics.in' }],
     }
-  }
+  },
+  activated() {
+    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
+      this.$fetch()
+    }
+  },
+  methods: {},
 }
 </script>
 

@@ -26,15 +26,15 @@ export default {
   props: {
     isAccountMenuActive: {
       type: Boolean,
-      default: function() {
+      default: function () {
         return false
-      }
-    }
+      },
+    },
   },
-  data: function() {
+  data: function () {
     return {}
   },
-  computed: {}
+  computed: {},
 }
 </script>
 

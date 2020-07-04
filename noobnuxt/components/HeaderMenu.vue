@@ -1,8 +1,8 @@
 <template>
   <div>
     <nav id="headermenu-app" class="navbar is-fixed-top is-dark">
-      <div class="container" style="width:100%;">
-        <div class="navbar-brand is-active ">
+      <div class="container" style="width: 100%;">
+        <div class="navbar-brand is-active">
           <a
             class="navbar-burger left-burger mobiledashes"
             role="button"
@@ -28,7 +28,7 @@
               width="26"
               height="26"
               viewBox="0 0 172 172"
-              style=" fill:#000000;"
+              style="fill: #000000;"
             >
               <g
                 fill="none"
@@ -41,7 +41,7 @@
                 stroke-dasharray=""
                 stroke-dashoffset="0"
                 font-family="none"
-                style="mix-blend-mode: normal"
+                style="mix-blend-mode: normal;"
               >
                 <path d="M0,172v-172h172v172z" fill="none"></path>
                 <g fill="#ffffff">
@@ -73,7 +73,7 @@
               width="25"
               height="25"
               viewBox="0 0 172 172"
-              style=" fill:#000000;"
+              style="fill: #000000;"
             >
               <g
                 fill="none"
@@ -86,7 +86,7 @@
                 stroke-dasharray=""
                 stroke-dashoffset="0"
                 font-family="none"
-                style="mix-blend-mode: normal"
+                style="mix-blend-mode: normal;"
               >
                 <path d="M0,172v-172h172v172z" fill="none"></path>
                 <g fill="#ffffff">
@@ -110,7 +110,7 @@
               width="25"
               height="25"
               viewBox="0 0 172 172"
-              style=" fill:#000000;"
+              style="fill: #000000;"
             >
               <g
                 fill="none"
@@ -123,7 +123,7 @@
                 stroke-dasharray=""
                 stroke-dashoffset="0"
                 font-family="none"
-                style="mix-blend-mode: normal"
+                style="mix-blend-mode: normal;"
               >
                 <path d="M0,172v-172h172v172z" fill="none"></path>
                 <g fill="#ffffff">
@@ -187,42 +187,42 @@ export default {
     NavbarMenuBar,
     NavbarSearchBar,
     NavbarCart,
-    NavbarMyAccount
+    NavbarMyAccount,
   },
 
-  data: function() {
+  data: function () {
     return {
       isMenuBarActive: false,
       isCartMenu: false,
       isAccountMenuActive: false,
-      isSearchMenuActive: false
+      isSearchMenuActive: false,
     }
   },
 
   computed: {
-    cart_count: function() {
+    cart_count: function () {
       return this.$store.state.cart.cart_count
-    }
+    },
   },
   watch: {
     $route(to, from) {
       this.isMenuBarActive = false
-    }
+    },
   },
   methods: {
-    toggleMenuBar: function() {
+    toggleMenuBar: function () {
       this.isMenuBarActive = !this.isMenuBarActive
     },
-    toggleSearchBar: function() {
+    toggleSearchBar: function () {
       this.isSearchMenuActive = !this.isSearchMenuActive
     },
-    toggleCartBar: function() {
+    toggleCartBar: function () {
       this.isCartMenu = !this.isCartMenu
     },
-    toggleAccountBar: function() {
+    toggleAccountBar: function () {
       this.isAccountMenuActive = !this.isAccountMenuActive
-    }
-  }
+    },
+  },
 }
 </script>
 

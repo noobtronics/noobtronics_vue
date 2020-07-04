@@ -11,7 +11,7 @@
     <div class="column is-5">
       <div
         class="field has-addons"
-        style="padding-bottom:10px;padding-left:10px;padding-right:10px;"
+        style="padding-bottom: 10px; padding-left: 10px; padding-right: 10px;"
       >
         <div class="control is-expanded">
           <input
@@ -27,7 +27,11 @@
           <button
             id="call-to-action-button-04"
             class="button"
-            style="background-color:#A91E45;color:white;border-color:transparent;"
+            style="
+              background-color: #a91e45;
+              color: white;
+              border-color: transparent;
+            "
             @click="submit_email"
           >
             Subscribe
@@ -43,7 +47,7 @@ export default {
   name: 'SubscribeEmail',
   data: () => {
     return {
-      email: ''
+      email: '',
     }
   },
   methods: {
@@ -51,13 +55,13 @@ export default {
       const self = this
       this.$http
         .post('/api/subscribe_email', { email: this.email })
-        .then(function(response) {
+        .then(function (response) {
           self.$cookies.set('eid', response.data.email_token, { expires: 999 })
         })
-        .catch(function() {})
-        .then(function() {})
-    }
-  }
+        .catch(function () {})
+        .then(function () {})
+    },
+  },
 }
 </script>
 
