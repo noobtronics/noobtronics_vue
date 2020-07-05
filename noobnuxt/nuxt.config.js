@@ -60,24 +60,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '~/modules/async_css.js',
-    [
-      '@nuxtjs/firebase',
-        {
-          config: {
-            apiKey: 'AIzaSyBXkGZXnWcnxfflA-eNY71tul3OLBXXOrY',
-            authDomain: 'proven-aura-212310.firebaseapp.com',
-            databaseURL: 'https://proven-aura-212310.firebaseio.com',
-            projectId: 'proven-aura-212310',
-            storageBucket: 'proven-aura-212310.appspot.com',
-            messagingSenderId: '436152518040',
-            appId: '1:436152518040:web:240b9d51fe408a1a7dd7ed',
-            measurementId: 'G-L6DK8K0TTZ'
-          },
-          services: {
-            auth: false // Just as example. Can be any other service.
-          }
-        }
-      ],
   ],
   /*
    ** Axios module configuration
