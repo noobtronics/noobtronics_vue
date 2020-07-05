@@ -13,10 +13,7 @@
               <figure class="image">
                 <img
                   class="lazyload"
-                  data-src="
-                    https://cdn.noobtronics.in/storage/home/first-made-in-india-arduino.jpg
-                  "
-                  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  src="/storage/home/first-made-in-india-arduino.jpg"                  
                   style="z-index: 1; position: absolute;"
                   alt="made in india arduino"
                 />
@@ -106,23 +103,15 @@
                     <div class="card-image">
                       <figure class="image" style="object-fit: cover;">
                         <picture>
-                          <source :srcset="prod.thumb.webp" type="image/webp" />
-                          <source :srcset="prod.thumb.jpg" type="image/jpeg" />
+                          <source :data-srcset="prod.thumb.webp" type="image/webp" />
+                          <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
 
                           <img
-                            v-if="aboveFoldImage()"
-                            :src="prod.thumb.jpg"
-                            :alt="prod.thumb.alt"
-                            width="150"
-                            height="150"
-                          />
-                          <img
-                            v-else
                             :data-src="prod.thumb.jpg"
                             :alt="prod.thumb.alt"
                             width="150"
                             height="150"
-                            class="lazyload"
+                            class="lazyloada"
                           />
                         </picture>
                       </figure>

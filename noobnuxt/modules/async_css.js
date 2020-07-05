@@ -8,6 +8,9 @@ function finalize_html(html) {
   })
   $(`head link[rel="stylesheet"]`).remove()
   $(`body`).append(`<script>` + command + `</script>`)
+
+  // $(`head link[rel="preload"]`).remove()
+
   html = $.html()
   return html
 }
