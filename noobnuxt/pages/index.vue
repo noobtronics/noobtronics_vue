@@ -13,7 +13,7 @@
               <figure class="image">
                 <img
                   class="lazyload"
-                  src="/storage/home/first-made-in-india-arduino.jpg"                  
+                  src="/storage/home/first-made-in-india-arduino.jpg"
                   style="z-index: 1; position: absolute;"
                   alt="made in india arduino"
                 />
@@ -111,7 +111,7 @@
                             :alt="prod.thumb.alt"
                             width="150"
                             height="150"
-                            class="lazyloada"
+                            class="lazyload"
                           />
                         </picture>
                       </figure>
