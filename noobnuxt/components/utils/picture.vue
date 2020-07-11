@@ -6,6 +6,7 @@
       loadingimagewhite: isLoading && whiteload,
     }"
     style="object-fit: cover;"
+    :style="base64Style"
   >
     <picture v-if="lazyload">
       <source
@@ -72,6 +73,12 @@ export default {
         return ''
       },
     },
+    base64: {
+      type: String,
+      default: function () {
+        return ''
+      },
+    },
     width: {
       type: String,
       default: function () {
@@ -119,6 +126,16 @@ export default {
     src: function () {
       if (this.asrc.length > 1) {
         return this.asrc
+      }
+      return ''
+    },
+    base64Style: function () {
+      if (this.base64.length > 1) {
+        return (
+          'background-repeat: no-repeat; background-size: cover; background-image: url(data:image/jpg;base64,' +
+          this.base64 +
+          ')'
+        )
       }
       return ''
     },

@@ -10,67 +10,16 @@
               class="column is-7 has-text-centered"
               style="padding: 0; margin: 0;"
             >
-              <figure class="image">
-                <img
-                  class="lazyload"
-                  src="/storage/home/first-made-in-india-arduino.jpg"
-                  style="z-index: 1; position: absolute;"
-                  alt="made in india arduino"
-                />
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 608 342">
-                  <defs />
-                  <filter id="a"><feGaussianBlur stdDeviation="12" /></filter>
-                  <rect width="100%" height="100%" fill="#5e2a30" />
-                  <g filter="url(#a)">
-                    <g
-                      fill-opacity=".5"
-                      transform="translate(1.2 1.2) scale(2.375)"
-                    >
-                      <circle
-                        r="1"
-                        fill="#fff8ff"
-                        transform="rotate(23.8 -78.1 515.8) scale(66.04409 37.51793)"
-                      />
-                      <circle
-                        r="1"
-                        fill="#d53539"
-                        transform="matrix(-180.04348 109.1063 -41.88044 -69.10968 125 28)"
-                      />
-                      <circle
-                        r="1"
-                        fill="#ceffff"
-                        transform="matrix(-29.23341 -22.43909 9.69763 -12.63397 107.5 85.8)"
-                      />
-                      <circle
-                        r="1"
-                        fill="#ff0e36"
-                        transform="matrix(100.59407 -34.63732 6.95733 20.20556 220 135.6)"
-                      />
-                      <circle
-                        r="1"
-                        fill="#ddfbff"
-                        transform="matrix(-38.80557 19.45388 -10.73888 -21.42135 220.2 89.4)"
-                      />
-                      <ellipse
-                        cx="171"
-                        cy="55"
-                        fill="#59a6b2"
-                        rx="46"
-                        ry="16"
-                      />
-                      <circle
-                        r="1"
-                        fill="#fd1c44"
-                        transform="rotate(124.3 108.6 74.7) scale(26.077 80.56939)"
-                      />
-                      <path
-                        fill="#760000"
-                        d="M77.6 105.8L-35 96l5.4-61.8L83 44z"
-                      />
-                    </g>
-                  </g>
-                </svg>
-              </figure>
+              <Picture
+                :key="meta.image.id + 'm'"
+                width="608px"
+                height="342px"
+                :base64="meta.image.base64"
+                :alt="meta.image.alt"
+                :asrc="meta.image.src"
+                :resolution="[1000, 600]"
+                :media="[1000, 300]"
+              />
             </div>
           </div>
         </div>
