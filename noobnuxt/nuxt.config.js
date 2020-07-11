@@ -74,8 +74,8 @@ export default {
   //   https: true,
   // },
   axios: {
-    host: 'localhost',
-    port: 8000,
+    host: 'api.localhost',
+    port: 80,
     https: false,
   },
   env: {
