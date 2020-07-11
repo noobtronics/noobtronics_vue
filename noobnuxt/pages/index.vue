@@ -101,24 +101,6 @@
                     @click="$router.push('/' + prod.slug)"
                   >
                     <div class="card-image">
-                      <!-- <picture>
-                          <source
-                            :data-srcset="prod.thumb.webp"
-                            type="image/webp"
-                          />
-                          <source
-                            :data-srcset="prod.thumb.jpg"
-                            type="image/jpeg"
-                          />
-
-                          <img
-                            :data-src="prod.thumb.jpg"
-                            :alt="prod.thumb.alt"
-                            width="150"
-                            height="150"
-                            class="lazyload"
-                          />
-                        </picture> -->
                       <Picture
                         lazyload
                         width="150px"
