@@ -2,38 +2,22 @@
   <div class="columns shopprodrow">
     <div class="column prodcolumn">
       <div
-        v-for="(prod, idx) in products"
+        v-for="prod in products"
         :key="prod.cardname + prod.cardtitle"
         class="card"
       >
         <div class="card-image">
-          <figure
-            class="image"
-            style="object-fit: cover; cursor: pointer;"
-            @click="$router.push('/' + prod.slug)"
-          >
-            <picture>
-              <source :data-srcset="prod.thumb.webp" type="image/webp" />
-              <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
-
-              <img
-                v-if="idx <= 4"
-                :src="prod.thumb.jpg"
-                :alt="prod.thumb.alt"
-                width="150"
-                height="150"
-              />
-
-              <img
-                v-if="idx > 4"
-                :data-src="prod.thumb.jpg"
-                :alt="prod.thumb.alt"
-                width="150"
-                height="150"
-                class="lazyload"
-              />
-            </picture>
-          </figure>
+          <div style="cursor: pointer;" @click="$router.push('/' + prod.slug)">
+            <Picture
+              lazyload
+              width="150px"
+              height="150px"
+              alt="prod.thumb.alt"
+              :asrc="prod.thumb.src"
+              :resolution="[600, 300, 100]"
+              :media="[2000, 300, 100]"
+            />
+          </div>
         </div>
         <div class="footerblock">
           <footer class="card-footer">
