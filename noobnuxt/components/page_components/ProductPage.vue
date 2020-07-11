@@ -150,17 +150,18 @@
       <div class="modal-background"></div>
       <div class="modal-content">
         <div v-if="modal_image">
-          <Picture
-            :key="mainimage.id + 'm'"
-            width="400px"
-            height="400px"
-            whiteload
-            :alt="mainimage.alt"
-            :asrc="mainimage.src"
-            :resolution="[1000]"
-            :media="[300]"
-          />
-
+          <div style="max-width: 500px;">
+            <Picture
+              :key="mainimage.id + 'm'"
+              width="400px"
+              height="400px"
+              whiteload
+              :alt="mainimage.alt"
+              :asrc="mainimage.src"
+              :resolution="[1000]"
+              :media="[300]"
+            />
+          </div>
           <div style="display: flex; justify-content: center;">
             <div
               v-for="v in data.images.data"
