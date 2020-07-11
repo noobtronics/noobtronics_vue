@@ -95,11 +95,7 @@
                   :key="prod.cardtitle + prod.cardname"
                   class="column horizontalprodcolumn"
                 >
-                  <div
-                    class="card"
-                    style="height: 100%;"
-                    @click="$router.push('/' + prod.slug)"
-                  >
+                  <div class="card" @click="$router.push('/' + prod.slug)">
                     <div class="card-image">
                       <Picture
                         lazyload
@@ -107,8 +103,8 @@
                         height="150px"
                         alt="prod.thumb.alt"
                         :asrc="prod.thumb.src"
-                        :resolution="[300, 600, 100]"
-                        :media="[300, 2000, 100]"
+                        :resolution="[600, 300, 100]"
+                        :media="[2000, 300, 100]"
                       />
                     </div>
                     <div class="footerblock">
