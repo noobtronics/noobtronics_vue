@@ -44,17 +44,15 @@
               </div>
 
               <div class="column has-text-centered photocolumn">
-                <div v-for="v in data.images.data" :key="v.id + 'm'">
-                  <Picture
-                    v-if="v.id == mainimage.id"
-                    width="300px"
-                    height="300px"
-                    :alt="v.alt"
-                    :asrc="v.src"
-                    :resolution="[1000, 600, 100]"
-                    :media="[2000, 300, 100]"
-                  />
-                </div>
+                <Picture
+                  :key="mainimage.id + 'm'"
+                  width="300px"
+                  height="300px"
+                  :alt="mainimage.alt"
+                  :asrc="mainimage.src"
+                  :resolution="[1000, 600, 100]"
+                  :media="[2000, 300, 100]"
+                />
               </div>
             </div>
           </div>
