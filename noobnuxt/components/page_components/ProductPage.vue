@@ -6,12 +6,12 @@
           <h1 id="prodh1" class="title">{{ data.meta.h1 }}</h1>
           <div class="categorylinks">
             <span>
-              <a href="/shop">Shop</a>
+              <nuxt-link to="/shop">Shop</nuxt-link>
               >
               <span>
-                <a :href="'/' + data.sub_category.slug">{{
+                <nuxt-link :to="'/' + data.sub_category.slug">{{
                   data.sub_category.name
-                }}</a>
+                }}</nuxt-link>
                 >
                 <span>
                   {{ data.shortname }}
