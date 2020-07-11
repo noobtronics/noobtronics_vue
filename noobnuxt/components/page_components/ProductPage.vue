@@ -35,6 +35,7 @@
                   <Picture
                     width="75px"
                     height="75px"
+                    whiteload
                     :alt="v.alt"
                     :asrc="v.src"
                     :resolution="[600, 300, 100]"
@@ -43,11 +44,15 @@
                 </div>
               </div>
 
-              <div class="column has-text-centered photocolumn">
+              <div
+                class="column has-text-centered photocolumn"
+                @click="modal_image = true"
+              >
                 <Picture
                   :key="mainimage.id + 'm'"
                   width="300px"
                   height="300px"
+                  whiteload
                   :alt="mainimage.alt"
                   :asrc="mainimage.src"
                   :resolution="[1000, 600, 100]"
@@ -140,6 +145,48 @@
         </div>
       </div>
     </section>
+
+    <div class="modal" :class="{ 'is-active': modal_image }">
+      <div class="modal-background"></div>
+      <div class="modal-content">
+        <div v-if="modal_image">
+          <Picture
+            :key="mainimage.id + 'm'"
+            width="400px"
+            height="400px"
+            whiteload
+            :alt="mainimage.alt"
+            :asrc="mainimage.src"
+            :resolution="[1000]"
+            :media="[300]"
+          />
+
+          <div style="display: flex;">
+            <div
+              v-for="v in data.images.data"
+              :key="v.id"
+              style="border: 1px solid rgba(255, 255, 255, 0.5);"
+              @click="change_image_by_id(v.id)"
+            >
+              <Picture
+                width="75px"
+                height="75px"
+                whiteload
+                :alt="v.alt"
+                :asrc="v.src"
+                :resolution="[600, 300, 100]"
+                :media="[3000, 2000, 100]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="modal-close is-large"
+        style="min-width: 50px; min-height: 50px;"
+        @click="modal_image = false"
+      ></button>
+    </div>
   </div>
 </template>
 
@@ -163,6 +210,8 @@ export default {
         stock: '',
         price: '',
       },
+
+      modal_image: false,
     }
   },
   head() {

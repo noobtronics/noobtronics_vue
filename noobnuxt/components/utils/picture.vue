@@ -1,7 +1,10 @@
 <template>
   <figure
     class="image"
-    :class="{ loadingimage: isLoading }"
+    :class="{
+      loadingimage: isLoading && !whiteload,
+      loadingimagewhite: isLoading && whiteload,
+    }"
     style="object-fit: cover;"
   >
     <picture v-if="lazyload">
@@ -82,6 +85,12 @@ export default {
       },
     },
     lazyload: {
+      type: Boolean,
+      default: function () {
+        return false
+      },
+    },
+    whiteload: {
       type: Boolean,
       default: function () {
         return false
