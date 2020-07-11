@@ -1,5 +1,9 @@
 <template>
-  <figure class="image" style="object-fit: cover;">
+  <figure
+    class="image"
+    :class="{ loadingimage: isLoading }"
+    style="object-fit: cover;"
+  >
     <picture v-if="lazyload">
       <source
         v-for="(r, i) in resolution"
@@ -21,6 +25,7 @@
         :height="height"
         :data-src="src + '-' + resolution[0] + '.jpg'"
         class="lazyload"
+        @load="loaded"
       />
     </picture>
     <picture v-else>
@@ -43,6 +48,7 @@
         :width="width"
         :height="height"
         :src="src + '-' + resolution[0] + '.jpg'"
+        @load="loaded"
       />
     </picture>
   </figure>
@@ -94,6 +100,11 @@ export default {
       },
     },
   },
+  data: function () {
+    return {
+      isLoading: true,
+    }
+  },
 
   computed: {
     src: function () {
@@ -101,6 +112,16 @@ export default {
         return this.asrc
       }
       return ''
+    },
+  },
+  watch: {
+    asrc: function () {
+      this.isLoading = true
+    },
+  },
+  methods: {
+    loaded: function () {
+      this.isLoading = false
     },
   },
 }
