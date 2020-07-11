@@ -161,11 +161,14 @@
             :media="[300]"
           />
 
-          <div style="display: flex;">
+          <div style="display: flex; justify-content: center;">
             <div
               v-for="v in data.images.data"
               :key="v.id"
-              style="border: 1px solid rgba(255, 255, 255, 0.5);"
+              style="
+                border: 1px solid rgba(255, 255, 255, 0.5);
+                max-width: 100px;
+              "
               @click="change_image_by_id(v.id)"
             >
               <Picture
