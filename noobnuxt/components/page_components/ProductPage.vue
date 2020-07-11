@@ -27,23 +27,34 @@
           <div class="container has-text-centered">
             <div class="columns is-mobile prodmainphoto">
               <div class="column is-3 showcasecolumn">
-                <figure
-                  v-for="(v, i) in data.images.data"
-                  :key="i"
-                  class="image"
+                <div
+                  v-for="v in data.images.data"
+                  :key="v.id"
+                  @click="change_image_by_id(v.id)"
                 >
-                  <picture @mouseover="change_image_by_id(i)">
-                    <source :srcset="v.webp" type="image/webp" />
-                    <source :srcset="v.jpg" type="image/jpeg" />
-                    <img :src="v.jpg" :alt="v.alt" width="300" height="300" />
-                  </picture>
-                </figure>
+                  <Picture
+                    width="75px"
+                    height="75px"
+                    :alt="v.alt"
+                    :asrc="v.src"
+                    :resolution="[600, 300, 100]"
+                    :media="[3000, 2000, 100]"
+                  />
+                </div>
               </div>
 
               <div class="column has-text-centered photocolumn">
-                <figure class="image">
-                  <a id="product_main_image" v-html="mainimage"> </a>
-                </figure>
+                <div v-for="v in data.images.data" :key="v.id + 'm'">
+                  <Picture
+                    v-if="v.id == mainimage.id"
+                    width="300px"
+                    height="300px"
+                    :alt="v.alt"
+                    :asrc="v.src"
+                    :resolution="[1000, 600, 100]"
+                    :media="[2000, 300, 100]"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -173,15 +184,7 @@ export default {
   },
   methods: {
     change_image_by_id: function (id) {
-      const img = this.data.images.data[id]
-      const html = `
-      <picture>
-        <source srcset="${img.webp}" type="image/webp">
-        <source srcset="${img.jpg}" type="image/jpeg">
-        <img id="${img.id}" src="${img.jpg}" alt="${img.alt}" >
-      </picture>`
-
-      this.mainimage = html
+      this.mainimage = this.data.images.data[id]
     },
     change_variant: function (id) {
       const variant = this.data.variants_dic[id]
