@@ -12,7 +12,7 @@
               lazyload
               width="150px"
               height="150px"
-              alt="prod.thumb.alt"
+              :alt="prod.thumb.alt"
               :asrc="prod.thumb.src"
               :resolution="[600, 300, 100]"
               :media="[2000, 300, 100]"

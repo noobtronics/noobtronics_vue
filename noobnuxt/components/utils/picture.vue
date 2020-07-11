@@ -3,14 +3,14 @@
     <picture v-if="lazyload">
       <source
         v-for="(r, i) in resolution"
-        :key="r"
+        :key="r + 'webp' + src"
         :media="'(min-width:' + media[i] + 'px)'"
         :data-srcset="src + '-' + r + '.webp ' + r + 'w'"
         type="image/webp"
       />
       <source
         v-for="(r, i) in resolution"
-        :key="r"
+        :key="r + 'jpg' + src"
         :media="'(min-width:' + media[i] + 'px)'"
         :data-srcset="src + '-' + r + '.jpg ' + r + 'w'"
         type="image/jpg"
@@ -26,14 +26,14 @@
     <picture v-else>
       <source
         v-for="(r, i) in resolution"
-        :key="r"
+        :key="r + 'webp' + src"
         :media="'(min-width:' + media[i] + 'px)'"
         :srcset="src + '-' + r + '.webp ' + r + 'w'"
         type="image/webp"
       />
       <source
         v-for="(r, i) in resolution"
-        :key="r"
+        :key="r + 'jpg' + src"
         :media="'(min-width:' + media[i] + 'px)'"
         :srcset="src + '-' + r + '.jpg ' + r + 'w'"
         type="image/jpg"
