@@ -13,17 +13,16 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
       {
         innerHTML: `(function(w) {var loadCSS = function(href, before, media) {        var doc = w.document;        var ss = doc.createElement('link');        var ref;        if(before) {            ref = before;        } else {            var refs = (doc.body || doc.getElementsByTagName('head')[0]).childNodes;            ref = refs[refs.length - 1];        }        var sheets = doc.styleSheets;        ss.rel = 'stylesheet';        ss.href = href;        ss.media = 'only x';        function ready(cb) {            if(doc.body) {                return cb();            }            setTimeout(function() {                ready(cb);            });        }        ready(function() {            ref.parentNode.insertBefore(ss, (before ? ref : ref.nextSibling));        });        var onloadcssdefined = function(cb) {            var resolvedHref = ss.href;            var i = sheets.length;            while(i--) {                if(sheets[i].href === resolvedHref) {                    return cb();                }            }            setTimeout(function() {                onloadcssdefined(cb);            });        };        function loadCB() {            if(ss.addEventListener) {                ss.removeEventListener('load', loadCB);            }            ss.media = media || 'all';        }        if(ss.addEventListener) {            ss.addEventListener('load', loadCB);        }        ss.onloadcssdefined = onloadcssdefined;        onloadcssdefined(loadCB);        return ss;    };    if(typeof exports !== 'undefined') {        exports.loadCSS = loadCSS;    } else {        w.loadCSS = loadCSS;    }}(typeof global !== 'undefined' ? global : this));`,
-        type: 'text/javascript'
-
-      }
+        type: 'text/javascript',
+      },
     ],
-    __dangerouslyDisableSanitizers: ['script']
+    __dangerouslyDisableSanitizers: ['script'],
   },
   /*
    ** Customize the progress-bar color
@@ -36,10 +35,14 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/lazysizes.js', '@/plugins/raise404.js'],
+  plugins: [
+    '@/plugins/lazysizes.js',
+    '@/plugins/raise404.js',
+    '@/plugins/picture.js',
+  ],
 
   styleResources: {
-    sass: ['~assets/sass/mobile-mixin.sass']
+    sass: ['~assets/sass/mobile-mixin.sass'],
   },
   /*
    ** Nuxt.js dev-modules
@@ -65,13 +68,18 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
+  // axios: {
+  //   host: 'api.noobtronics.in',
+  //   port: 443,
+  //   https: true,
+  // },
   axios: {
-    host: 'api.noobtronics.in',
-    port: 443,
-    https: true,
+    host: 'localhost',
+    port: 8000,
+    https: false,
   },
   env: {
-    cdnURL: 'https://cdn.noobtronics.in'
+    cdnURL: 'https://cdn.noobtronics.in',
   },
 
   /*
@@ -81,9 +89,9 @@ export default {
     postcss: {
       preset: {
         features: {
-          customProperties: false
-        }
-      }
+          customProperties: false,
+        },
+      },
     },
 
     extractCSS: true,
@@ -94,10 +102,10 @@ export default {
             name: 'styles',
             test: /\.css$/,
             chunks: 'all',
-            enforce: true
-          }
-        }
-      }
+            enforce: true,
+          },
+        },
+      },
     },
 
     optimization: {
@@ -107,18 +115,17 @@ export default {
         new OptimizeCSSAssetsPlugin({
           cssProcessor: require('cssnano'),
           cssProcessorPluginOptions: {
-            preset: ['default', { discardComments: { removeAll: true } }]
+            preset: ['default', { discardComments: { removeAll: true } }],
           },
-          canPrint: true
-        })
-      ]
+          canPrint: true,
+        }),
+      ],
     },
 
     /*
      ** You can extend webpack config here
      */
-    extend(config, { isDev, isClient }) {
-    }
+    extend(config, { isDev, isClient }) {},
   },
   render: {
     bundleRenderer: {
@@ -126,15 +133,15 @@ export default {
         if (type === 'script' || type === 'style') {
           return true
         }
-      }
+      },
     },
     http2: {
       push: true,
       pushAssets: (req, res, publicPath, preloadFiles) => {
-        return preloadFiles.filter(f => f.asType === 'script').map(
-          (f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`
-        )
-      }
-    }
-  }
+        return preloadFiles
+          .filter((f) => f.asType === 'script')
+          .map((f) => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`)
+      },
+    },
+  },
 }

@@ -101,10 +101,15 @@
                     @click="$router.push('/' + prod.slug)"
                   >
                     <div class="card-image">
-                      <figure class="image" style="object-fit: cover;">
-                        <picture>
-                          <source :data-srcset="prod.thumb.webp" type="image/webp" />
-                          <source :data-srcset="prod.thumb.jpg" type="image/jpeg" />
+                      <!-- <picture>
+                          <source
+                            :data-srcset="prod.thumb.webp"
+                            type="image/webp"
+                          />
+                          <source
+                            :data-srcset="prod.thumb.jpg"
+                            type="image/jpeg"
+                          />
 
                           <img
                             :data-src="prod.thumb.jpg"
@@ -113,8 +118,16 @@
                             height="150"
                             class="lazyload"
                           />
-                        </picture>
-                      </figure>
+                        </picture> -->
+                      <Picture
+                        lazyload
+                        width="150px"
+                        height="150px"
+                        alt="prod.thumb.alt"
+                        :asrc="prod.thumb.src"
+                        :resolution="[300, 600, 100]"
+                        :media="[300, 2000, 100]"
+                      />
                     </div>
                     <div class="footerblock">
                       <footer class="card-footer">
