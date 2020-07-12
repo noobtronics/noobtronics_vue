@@ -39,6 +39,7 @@ export default {
     '@/plugins/lazysizes.js',
     '@/plugins/raise404.js',
     '@/plugins/picture.js',
+    '@/plugins/notify.js',
   ],
 
   styleResources: {

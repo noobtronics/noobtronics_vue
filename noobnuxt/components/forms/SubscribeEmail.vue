@@ -52,18 +52,26 @@ export default {
   },
   methods: {
     submit_email: function () {
-      this.$store.dispatch('insertNotification', {
-        data: { name: 123 },
-        timeout: 5000,
-      })
-      // const self = this
-      // this.$http
-      //   .post('/api/subscribe_email', { email: this.email })
-      //   .then(function (response) {
-      //     self.$cookies.set('eid', response.data.email_token, { expires: 999 })
-      //   })
-      //   .catch(function () {})
-      //   .then(function () {})
+      if (!this.$validator.isEmail(this.email)) {
+        this.$notify('failed', 'Please enter correct email.')
+        return
+      }
+      const self = this
+      this.$axios
+        .post('/api/subscribe_email', { email: this.email })
+        .then(function (response) {
+          if (!self.$cookies.get('eid')) {
+            self.$cookies.set('eid', response.data.email_token, {
+              expires: 999,
+            })
+          }
+          self.$notify('success', 'You are now subscribed.')
+        })
+        .catch(function (error) {
+          self.$notify('failed', 'Server Error Occured.')
+          console.log(error)
+        })
+        .then(function () {})
     },
   },
 }

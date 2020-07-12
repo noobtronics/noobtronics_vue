@@ -2,16 +2,13 @@
   <div>
     <div class="notificationsdiv">
       <div
-        v-for="(n, i) in notifications"
-        :key="i"
-        class="notification is-primary is-light"
+        v-for="n in notifications"
+        :key="n.id"
+        class="notification"
+        :class="n.class"
       >
-        <button class="delete"></button>
-        Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem
-        ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis
-        placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
-        fringilla. Nullam gravida purus diam, et dictum
-        <a>felis venenatis</a> efficitur. Sit amet, consectetur adipiscing elit
+        <button class="delete" @click="deleteNotification(n.id)"></button>
+        <div v-html="n.message"></div>
       </div>
     </div>
   </div>
@@ -21,7 +18,17 @@
 export default {
   computed: {
     notifications: function () {
-      return this.$store.state.notifications.ids
+      const nots = []
+      this.$store.state.notifications.ids.forEach((item, i) => {
+        nots.push(this.$store.state.notifications.data[item])
+      })
+
+      return nots
+    },
+  },
+  methods: {
+    deleteNotification: function (id) {
+      this.$store.commit('deleteNotificationPayload', id)
     },
   },
 }
