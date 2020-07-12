@@ -67,9 +67,8 @@ export default {
           }
           self.$notify('success', 'You are now subscribed.')
         })
-        .catch(function (error) {
+        .catch(function () {
           self.$notify('failed', 'Server Error Occured.')
-          console.log(error)
         })
         .then(function () {})
     },

@@ -65,7 +65,7 @@
       <div class="navbar-item">
         <div class="field is-grouped">
           <p class="control">
-            <a class="bd-tw-button button">
+            <nuxt-link to="/shop" class="bd-tw-button button">
               <span class="icon">
                 <img
                   alt="store icon"
@@ -75,7 +75,7 @@
               <span>
                 Store
               </span>
-            </a>
+            </nuxt-link>
           </p>
           <p class="control">
             <a

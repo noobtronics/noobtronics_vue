@@ -6,6 +6,7 @@
       style="height: 400px; padding: 100px 0px;"
     >
       <h1>An error occurred</h1>
+      <h2>Please refresh this page or go to another url.</h2>
       <nuxt-link to="/">Home page</nuxt-link>
     </div>
     <Footer />
