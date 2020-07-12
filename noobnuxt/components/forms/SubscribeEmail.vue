@@ -51,15 +51,19 @@ export default {
     }
   },
   methods: {
-    submit_email: () => {
-      const self = this
-      this.$http
-        .post('/api/subscribe_email', { email: this.email })
-        .then(function (response) {
-          self.$cookies.set('eid', response.data.email_token, { expires: 999 })
-        })
-        .catch(function () {})
-        .then(function () {})
+    submit_email: function () {
+      this.$store.dispatch('insertNotification', {
+        data: { name: 123 },
+        timeout: 5000,
+      })
+      // const self = this
+      // this.$http
+      //   .post('/api/subscribe_email', { email: this.email })
+      //   .then(function (response) {
+      //     self.$cookies.set('eid', response.data.email_token, { expires: 999 })
+      //   })
+      //   .catch(function () {})
+      //   .then(function () {})
     },
   },
 }
