@@ -146,11 +146,11 @@
       </div>
     </section>
 
-    <div class="modal" :class="{ 'is-active': modal_image }">
+    <div class="modal prodimagemodal" :class="{ 'is-active': modal_image }">
       <div class="modal-background"></div>
       <div class="modal-content">
         <div v-if="modal_image">
-          <div style="max-width: 500px;">
+          <div>
             <Picture
               :key="mainimage.id + 'm'"
               width="400px"
@@ -493,4 +493,15 @@ export default {
       padding: 2px
       padding-right: 6px
       padding-left: 12px
+
+
+.prodimagemodal
+  .modal-content
+    padding: 5px
+
++desktop
+  .prodimagemodal
+    .modal-content
+      max-height: 100%
+      padding: 5%
 </style>
