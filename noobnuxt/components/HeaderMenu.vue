@@ -64,7 +64,7 @@
             class="navbar-burger left-search right-search"
             data-target="navCart"
             title="Cart"
-            @click="toggleCartBar"
+            @click="openCart"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +242,7 @@
                 <a
                   class="button badge is-inverted badge is-badge-danger cartbuttons"
                   :data-badge="cart_count > 0 ? cart_count : false"
-                  href="https://github.com/jgthms/bulma/releases/download/0.8.0/bulma-0.8.0.zip"
+                  @click="openCart"
                 >
                   <span class="icon">
                     <img
@@ -257,7 +257,6 @@
                 <a
                   class="button badge is-inverted badge is-badge-danger cartbuttons"
                   :data-badge="cart_count > 0 ? cart_count : false"
-                  href="https://github.com/jgthms/bulma/releases/download/0.8.0/bulma-0.8.0.zip"
                 >
                   <span class="icon">
                     <svg
@@ -302,27 +301,18 @@
           :class="{ 'is-active': isAccountMenuActive }"
         >
           <div class="navbar-start">
-            <a class="navbar-item" href="https://bulma.io/">
+            <a class="navbar-item">
               Log In
             </a>
-            <a class="navbar-item" href="https://bulma.io/">
+            <a class="navbar-item">
               Sign Up
             </a>
-            <a class="navbar-item" href="https://bulma.io/">
+            <a class="navbar-item">
               Your Orders
             </a>
-            <a class="navbar-item" href="https://bulma.io/">
+            <a class="navbar-item">
               Logout
             </a>
-          </div>
-        </div>
-
-        <div
-          class="navbar-menu is-hidden-desktop"
-          :class="{ 'is-active': isCartMenu }"
-        >
-          <div class="navbar-start">
-            <p class="content">Your Cart is Empty</p>
           </div>
         </div>
       </div>
@@ -366,7 +356,6 @@ export default {
       isBlog: false,
       isInfo: false,
       isMenuBarActive: false,
-      isCartMenu: false,
       isAccountMenuActive: false,
       isSearchMenuActive: false,
     }
@@ -389,9 +378,7 @@ export default {
     toggleSearchBar: function () {
       this.isSearchMenuActive = !this.isSearchMenuActive
     },
-    toggleCartBar: function () {
-      this.isCartMenu = !this.isCartMenu
-    },
+    openCart: function () {},
     toggleAccountBar: function () {
       this.isAccountMenuActive = !this.isAccountMenuActive
     },
