@@ -226,7 +226,7 @@
         </div>
 
         <div class="navbar-end is-hidden-mobile">
-          <div class="navbar-item">
+          <div class="navbar-item btnitem">
             <div class="field">
               <p class="control">
                 <nuxt-link to="/shop" class="bd-tw-button button">
@@ -240,7 +240,7 @@
               </p>
             </div>
           </div>
-          <div class="navbar-item">
+          <div class="navbar-item btnitem">
             <div class="field">
               <p class="control">
                 <a
@@ -301,7 +301,7 @@
                   </svg>
                 </span>
               </button>
-              <div class="navbar-dropdown">
+              <div class="navbar-dropdown accountmenu">
                 <nuxt-link class="navbar-item" to="/shop">Log in</nuxt-link>
                 <nuxt-link class="navbar-item" to="/shop/microcontrollers">
                   Sign up
@@ -379,7 +379,11 @@ export default {
     toggleSearchBar: function () {
       this.isSearchMenuActive = !this.isSearchMenuActive
     },
-    openCart: function () {},
+    openCart: function () {
+      if (this.cart_count === 0) {
+        this.$notify('failed', 'Your Cart is Empty.')
+      }
+    },
     toggleAccountBar: function () {
       this.isAccountMenuActive = !this.isAccountMenuActive
     },
@@ -455,6 +459,11 @@ export default {
 .navbarbtn
   margin: auto 0
 
+.btnitem
+  padding: 0
+  padding-right: 10px
+
+
 +mobile
   .navbar-menu
 
@@ -469,6 +478,11 @@ export default {
   .searchbar
     .navbar-item
       padding: 0
+
+  .accountmenu
+    font-size: 1rem
+    .navbar-item
+      padding: 0.5rem 0.75rem
 
 +iphone_plus
   .navbar-logo

@@ -43,4 +43,8 @@ export default {
   max-width: 700px
   left: 50%
   transform: translateX(-50%)
+
++mobile
+  .notificationsdiv
+    width: calc(100% - 20px)
 </style>
