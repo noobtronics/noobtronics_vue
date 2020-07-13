@@ -11,6 +11,7 @@
               style="padding: 0; margin: 0;"
             >
               <Picture
+                v-if="meta.image"
                 :key="meta.image.id + 'm'"
                 width="608px"
                 height="342px"
