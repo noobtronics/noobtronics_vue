@@ -210,14 +210,20 @@
             <div class="field has-addons" style="padding: 5px;">
               <div class="control is-expanded">
                 <input
+                  v-model="searchKeyword"
                   class="input"
                   placeholder="find product, blog eg. 'arduino uno' "
                   aria-label="email"
                   aria-describedby="call-to-action-search"
+                  @keyup.enter="openSearch"
                 />
               </div>
               <div class="control">
-                <button id="call-to-action-search" class="button is-danger">
+                <button
+                  id="call-to-action-search"
+                  class="button is-danger"
+                  @click="openSearch"
+                >
                   Search
                 </button>
               </div>
@@ -359,6 +365,7 @@ export default {
       isMenuBarActive: false,
       isAccountMenuActive: false,
       isSearchMenuActive: false,
+      searchKeyword: '',
     }
   },
 
@@ -383,6 +390,10 @@ export default {
       if (this.cart_count === 0) {
         this.$notify('failed', 'Your Cart is Empty.')
       }
+    },
+    openSearch: function () {
+      const url = '/search?keyword=' + encodeURI(this.searchKeyword)
+      this.$router.push(url)
     },
     toggleAccountBar: function () {
       this.isAccountMenuActive = !this.isAccountMenuActive
