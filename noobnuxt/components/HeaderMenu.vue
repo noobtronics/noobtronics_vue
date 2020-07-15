@@ -216,6 +216,7 @@
                   aria-label="email"
                   aria-describedby="call-to-action-search"
                   @keyup.enter="openSearch"
+                  ref="searchinput"
                 />
               </div>
               <div class="control">
@@ -392,6 +393,7 @@ export default {
       }
     },
     openSearch: function () {
+      this.$refs.openSearch.blur()
       const url = '/search?keyword=' + encodeURI(this.searchKeyword)
       this.$router.push(url)
     },
