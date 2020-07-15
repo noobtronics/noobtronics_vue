@@ -393,7 +393,7 @@ export default {
       }
     },
     openSearch: function () {
-      this.$refs.openSearch.blur()
+      this.$refs.searchinput.blur()
       const url = '/search?keyword=' + encodeURI(this.searchKeyword)
       this.$router.push(url)
     },
