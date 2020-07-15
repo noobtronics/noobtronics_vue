@@ -145,4 +145,12 @@ export default {
       },
     },
   },
+
+  generate: {
+    routes: [
+      '/shop',
+      '/search?keyword=arduino'
+    ]
+  },
+
 }
