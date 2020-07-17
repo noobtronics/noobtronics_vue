@@ -15,7 +15,7 @@
             <div class="column is-half">
               <h3 class="title is-6">Products</h3>
               <ul>
-                <li><a href="/">Microcontrollers</a></li>
+                <li><a href="/">Microcontrollers1</a></li>
                 <li><a href="/">Arduino Kits</a></li>
                 <li><a href="/">LCD Module</a></li>
                 <li><a href="/">Tinkering Supply</a></li>
