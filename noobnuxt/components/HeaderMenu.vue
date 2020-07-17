@@ -210,13 +210,13 @@
             <div class="field has-addons" style="padding: 5px;">
               <div class="control is-expanded">
                 <input
+                  ref="searchinput"
                   v-model="searchKeyword"
                   class="input"
                   placeholder="find product, blog eg. 'arduino uno' "
                   aria-label="email"
                   aria-describedby="call-to-action-search"
                   @keyup.enter="openSearch"
-                  ref="searchinput"
                 />
               </div>
               <div class="control">
