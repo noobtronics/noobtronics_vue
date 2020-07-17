@@ -141,6 +141,15 @@ export default {
     },
   },
 
+  pwa: {
+    meta: {
+      name: 'noobtronics: from noob to pro electronics',
+      author: 'noobtronics',
+      description: 'noobtronics is one stop shop to lean, read, test and shop electronics',
+      theme_color: '#23D160'
+    }
+  },
+
   generate: {
     routes: [
       '/shop',
