@@ -147,13 +147,18 @@ export default {
       author: 'noobtronics',
       description: 'noobtronics is one stop shop to lean, read, test and shop electronics',
       theme_color: '#23D160'
+    },
+    workbox:{
+      offlineStategy: 'staleWhileRevalidate',
+      cacheId: 'noobtronics'
     }
   },
 
   generate: {
     routes: [
       '/shop',
-      '/search?keyword=arduino'
+      '/search?keyword=arduino',
+      '404'
     ]
   },
 }
