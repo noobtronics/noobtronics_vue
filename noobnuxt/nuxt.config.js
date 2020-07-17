@@ -151,7 +151,9 @@ export default {
       name: 'noobtronics: from noob to pro electronics',
       author: 'noobtronics',
       description: 'noobtronics is one stop shop to lean, read, test and shop electronics',
-      theme_color: '#23D160'
+    },
+    manifest: {
+      name: 'noobtronics: from noob to pro electronics',
     },
     workbox:{
       offlineStategy: 'staleWhileRevalidate',
@@ -163,7 +165,6 @@ export default {
     routes: [
       '/shop',
       '/search?keyword=arduino',
-      '404'
     ]
   },
 
