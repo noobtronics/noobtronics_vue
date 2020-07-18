@@ -48,7 +48,9 @@ export default {
 
     const data = await this.$axios
       .$get('api/static/shoppage', {
-        slug: '/shop/' + this.$route.params.category,
+        params: {
+          slug: '/shop/' + this.$route.params.category,
+        },
       })
       .catch(() => {
         that.found = false

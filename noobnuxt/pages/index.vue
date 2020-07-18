@@ -127,7 +127,9 @@ export default {
   components: {},
   async fetch() {
     this.data = await this.$axios.$get('api/static/homepage', {
-      useCache: true,
+      params: {
+        useCache: true,
+      },
     })
     this.catalog = this.data.catalog
     this.meta = this.data.meta

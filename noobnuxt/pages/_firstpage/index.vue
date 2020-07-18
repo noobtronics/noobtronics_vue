@@ -24,7 +24,9 @@ export default {
 
     const data = await this.$axios
       .$get('api/static/firstpage', {
-        slug: '/' + this.$route.params.firstpage,
+        params: {
+          slug: '/' + this.$route.params.firstpage,
+        },
       })
       .catch(() => {
         that.found = false

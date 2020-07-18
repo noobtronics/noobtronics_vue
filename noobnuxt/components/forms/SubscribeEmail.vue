@@ -58,7 +58,7 @@ export default {
       }
       const self = this
       this.$axios
-        .post('/api/subscribe_email', { email: this.email })
+        .post('/api/user/subscribe_email', { email: this.email })
         .then(function (response) {
           if (!self.$cookies.get('eid')) {
             self.$cookies.set('eid', response.data.email_token, {

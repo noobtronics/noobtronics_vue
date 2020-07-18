@@ -24,11 +24,13 @@ export default {
 
     const data = await this.$axios
       .$get('api/static/secondpage', {
-        slug:
-          '/' +
-          this.$route.params.firstpage +
-          '/' +
-          this.$route.params.secondpage,
+        params: {
+          slug:
+            '/' +
+            this.$route.params.firstpage +
+            '/' +
+            this.$route.params.secondpage,
+        },
       })
       .catch(() => {
         that.found = false

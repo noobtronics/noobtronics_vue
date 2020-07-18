@@ -19,8 +19,10 @@ export default {
     ProductCards,
   },
   async fetch() {
-    this.data = await this.$axios.$get('api/search', {
-      keyword: this.$route.query.keyword,
+    this.data = await this.$axios.$get('api/query/search', {
+      params: {
+        keyword: this.$route.query.keyword,
+      },
     })
     this.products = this.data.products
     this.keyword = this.data.keyword
