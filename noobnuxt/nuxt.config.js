@@ -165,7 +165,8 @@ export default {
     routes: [
       '/shop',
       '/search?keyword=arduino',
-    ]
+    ],
+    fallback: '404.html'
   },
 
 }
