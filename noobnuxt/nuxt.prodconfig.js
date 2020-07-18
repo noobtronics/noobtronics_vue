@@ -10,7 +10,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'noobtronics: from noob to pro electronics',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -149,10 +149,12 @@ export default {
     },
     manifest: {
       name: 'noobtronics: from noob to pro electronics',
+      short_name: 'noobtronics',
+      orientation: 'portrait',
     },
     workbox:{
       offlineStategy: 'staleWhileRevalidate',
-      cacheId: 'noobtronics'
+      cacheId: 'noobtronics',
     }
   },
 
