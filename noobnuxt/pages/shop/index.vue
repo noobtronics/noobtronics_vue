@@ -34,7 +34,7 @@ export default {
     ProductCards,
   },
   async fetch() {
-    this.data = await this.$axios.$post('api/static/shoppage', {
+    this.data = await this.$axios.$get('api/static/shoppage', {
       slug: '/shop',
     })
     this.categorys = this.data.categorys

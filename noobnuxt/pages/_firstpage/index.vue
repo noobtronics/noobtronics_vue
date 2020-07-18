@@ -23,7 +23,7 @@ export default {
     this.found = true
 
     const data = await this.$axios
-      .$post('api/static/firstpage', {
+      .$get('api/static/firstpage', {
         slug: '/' + this.$route.params.firstpage,
       })
       .catch(() => {
