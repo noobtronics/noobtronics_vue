@@ -54,6 +54,9 @@ export default {
     '@nuxtjs/style-resources',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
+    '~/modules/pwa_extension.js',
+    '@nuxtjs/pwa',
+    '~/modules/async_css.js',
   ],
   /*
    ** Nuxt.js modules
@@ -62,8 +65,6 @@ export default {
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
-    '~/modules/async_css.js',
   ],
   /*
    ** Axios module configuration
@@ -150,25 +151,38 @@ export default {
     meta: {
       name: 'noobtronics: from noob to pro electronics',
       author: 'noobtronics',
-      description: 'noobtronics is one stop shop to lean, read, test and shop electronics',
+      description:
+        'noobtronics is one stop shop to lean, read, test and shop electronics',
     },
     manifest: {
       name: 'noobtronics: from noob to pro electronics',
       short_name: 'noobtronics',
       orientation: 'portrait',
+      lang: 'en',
     },
-    workbox:{
-      offlineStategy: 'staleWhileRevalidate',
-      cacheId: 'noobtronics',    
-    }
+    workbox: {
+      cacheId: 'noobtronics',
+      dev: true,
+
+      runtimeCaching: [
+        {
+          urlPattern: 'https:\/\/cdn\.noobtronics\.in\/.*\.(webp|jpg)',
+          handler: 'cacheFirst'
+        },
+        {
+          urlPattern: 'https:\/\/api\.noobtronics\.in\/api\/.*',
+          method: 'GET',
+          handler: 'networkFirst'
+        },
+      ],
+    },
   },
 
   generate: {
     routes: [
       '/shop',
-      '/search?keyword=arduino',
+      '/',
     ],
-    fallback: '404.html'
+    fallback: true,
   },
-
 }
