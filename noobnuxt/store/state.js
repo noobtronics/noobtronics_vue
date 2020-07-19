@@ -6,4 +6,7 @@ export default () => ({
     ids: [],
     data: {},
   },
+  user: {
+    ga_clientId: '',
+  },
 })

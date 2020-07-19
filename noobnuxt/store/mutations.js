@@ -10,4 +10,7 @@ export default {
     }
     state.notifications.data[id] = null
   },
+  updateGAClientID(state, id) {
+    state.user.ga_clientId = id
+  },
 }

@@ -380,6 +380,22 @@ export default {
       this.isMenuBarActive = false
     },
   },
+  mounted: function () {
+    const that = this
+    this.$ga.query(function (tracker) {
+      const clientId = tracker.get('clientId')
+      that.$store.commit('updateGAClientID', clientId)
+
+      that.$axios
+        .$get('api/user/analytics', {
+          params: {
+            gacid: clientId,
+          },
+          withCredentials: true,
+        })
+        .then(function () {})
+    })
+  },
   methods: {
     toggleMenuBar: function () {
       this.isMenuBarActive = !this.isMenuBarActive

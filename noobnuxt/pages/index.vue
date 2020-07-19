@@ -180,11 +180,7 @@ export default {
       __dangerouslyDisableSanitizers: ['script', 'style'],
     }
   },
-  activated() {
-    if (this.$fetchState.timestamp <= Date.now() - 7200000) {
-      this.$fetch()
-    }
-  },
+  activated() {},
   methods: {
     aboveFoldImage: function () {
       return false

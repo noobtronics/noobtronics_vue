@@ -87,6 +87,13 @@ export default {
       enabled: true,
       sendHitTask: true,
     },
+    autoTracking: {
+      exception: true,
+      ecommerce: {
+        enabled: true,
+        enhanced: true,
+      },
+    },
   },
   axios: {
     host: 'api.localhost',
