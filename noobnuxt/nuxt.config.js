@@ -57,6 +57,12 @@ export default {
     '~/modules/pwa_extension.js',
     '@nuxtjs/pwa',
     '~/modules/async_css.js',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-125040779-2',
+      },
+    ],
   ],
   /*
    ** Nuxt.js modules
@@ -75,6 +81,13 @@ export default {
   //   port: 443,
   //   https: true,
   // },
+
+  googleAnalytics: {
+    debug: {
+      enabled: true,
+      sendHitTask: true,
+    },
+  },
   axios: {
     host: 'api.localhost',
     port: 80,
@@ -162,27 +175,26 @@ export default {
     },
     workbox: {
       cacheId: 'noobtronics',
-      dev: true,
+      dev: false,
+
+      offlineAnalytics: true,
 
       runtimeCaching: [
         {
-          urlPattern: 'https:\/\/cdn\.noobtronics\.in\/.*\.(webp|jpg)',
-          handler: 'cacheFirst'
+          urlPattern: 'https://cdn.noobtronics.in/.*.(webp|jpg)',
+          handler: 'cacheFirst',
         },
         {
-          urlPattern: 'https:\/\/api\.noobtronics\.in\/api\/.*',
+          urlPattern: 'https://api.noobtronics.in/api/.*',
           method: 'GET',
-          handler: 'networkFirst'
+          handler: 'networkFirst',
         },
       ],
     },
   },
 
   generate: {
-    routes: [
-      '/shop',
-      '/',
-    ],
+    routes: ['/shop', '/'],
     fallback: true,
   },
 }
