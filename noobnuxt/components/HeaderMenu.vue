@@ -385,15 +385,17 @@ export default {
     this.$ga.query(function (tracker) {
       const clientId = tracker.get('clientId')
       that.$store.commit('updateGAClientID', clientId)
+      const trackers = that.$get_trackers()
+      trackers.gacid = clientId
 
       that.$axios
         .$get('api/user/analytics', {
-          params: {
-            gacid: clientId,
-          },
-          withCredentials: true,
+          params: trackers,
         })
-        .then(function () {})
+        .then(function (response) {
+          console.log(response)
+          that.$set_trackers(response.trackers)
+        })
     })
   },
   methods: {

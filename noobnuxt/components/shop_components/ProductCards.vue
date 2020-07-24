@@ -35,7 +35,10 @@
             </p>
             <p class="card-footer-item">
               <span>
-                <button class="button is-small is-warning">
+                <button
+                  class="button is-small is-warning"
+                  @click="addToCart(prod.sku)"
+                >
                   Add to Cart
                 </button>
               </span>
@@ -57,6 +60,20 @@ export default {
       default: function () {
         return []
       },
+    },
+  },
+  methods: {
+    addToCart: function (sku) {
+      const self = this
+      this.$axios
+        .post('/api/user/cart', { sku: sku, trackers: self.$get_trackers() })
+        .then(function (response) {
+          self.$notify('cartadded', 'SKU: ' + sku)
+        })
+        .catch(function () {
+          self.$notify('failed', 'Server Error Occured <br>Try Refreshing Page')
+        })
+        .then(function () {})
     },
   },
 }
