@@ -40,6 +40,7 @@ export default {
     '@/plugins/raise404.js',
     '@/plugins/picture.js',
     '@/plugins/notify.js',
+    '@/plugins/tracking.js',
   ],
 
   styleResources: {
