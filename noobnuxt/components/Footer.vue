@@ -15,17 +15,23 @@
             <div class="column is-half">
               <h3 class="title is-6">Products</h3>
               <ul>
-                <li><a href="/">Microcontrollers</a></li>
-                <li><a href="/">Arduino Kits</a></li>
-                <li><a href="/">LCD Module</a></li>
-                <li><a href="/">Tinkering Supply</a></li>
+                <li>
+                  <nuxt-link to="/shop/microcontrollers"
+                    >Microcontrollers</nuxt-link
+                  >
+                </li>
+                <li><nuxt-link to="/shop/kits">Arduino Kits</nuxt-link></li>
+                <li><nuxt-link to="/shop/modules">Wifi Modules</nuxt-link></li>
+                <li><nuxt-link to="/shop">All Products</nuxt-link></li>
               </ul>
             </div>
             <div class="column is-half">
-              <h3 class="title is-6">Your Account 1</h3>
+              <h3 class="title is-6">Your Account</h3>
               <ul>
-                <li><a href="#">Cart(0)</a></li>
-                <li><a href="#">Your Orders</a></li>
+                <li>
+                  <nuxt-link to="/cart">Cart({{ cart_count }})</nuxt-link>
+                </li>
+                <li><nuxt-link to="/account/orders">Your Orders</nuxt-link></li>
               </ul>
             </div>
 
@@ -39,8 +45,8 @@
             <div class="column is-half">
               <h3 class="title is-6">Blog</h3>
               <ul>
-                <li><a href="#">Learn Arduino</a></li>
-                <li><a href="#">Datasheet</a></li>
+                <li><nuxt-link to="/">Learn Arduino</nuxt-link></li>
+                <li><nuxt-link to="/">Datasheet</nuxt-link></li>
               </ul>
             </div>
           </div>
@@ -60,7 +66,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    cart_count: function () {
+      return this.$store.state.cart.cart_count
+    },
+  },
+}
 </script>
 
 <style lang="sass"></style>

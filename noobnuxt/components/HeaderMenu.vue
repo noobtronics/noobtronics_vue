@@ -318,14 +318,27 @@
                 </span>
               </button>
               <div class="navbar-dropdown accountmenu">
-                <nuxt-link class="navbar-item" to="/shop">Log in</nuxt-link>
-                <nuxt-link class="navbar-item" to="/shop/microcontrollers">
+                <nuxt-link
+                  v-if="!user_loggedin"
+                  class="navbar-item"
+                  to="/account/login"
+                  >Log in</nuxt-link
+                >
+                <nuxt-link
+                  v-if="!user_loggedin"
+                  class="navbar-item"
+                  to="/account/signup"
+                >
                   Sign up
                 </nuxt-link>
-                <nuxt-link class="navbar-item" to="/shop/kits">
+                <nuxt-link class="navbar-item" to="/account/orders">
                   Your Orders
                 </nuxt-link>
-                <nuxt-link class="navbar-item" to="/shop/modules">
+                <nuxt-link
+                  v-if="user_loggedin"
+                  class="navbar-item"
+                  to="/account/logout"
+                >
                   Log Out
                 </nuxt-link>
               </div>
@@ -383,6 +396,9 @@ export default {
     cart_count: function () {
       return this.$store.state.cart.cart_count
     },
+    user_loggedin: function () {
+      return this.$store.state.user.loggedin
+    },
   },
   watch: {
     $route(to, from) {
@@ -417,7 +433,10 @@ export default {
     openCart: function () {
       if (this.cart_count === 0) {
         this.$notify('failed', 'Your Cart is Empty.')
+        return
       }
+      const url = '/cart'
+      this.$router.push(url)
     },
     openSearch: function () {
       this.$refs.searchinput.blur()

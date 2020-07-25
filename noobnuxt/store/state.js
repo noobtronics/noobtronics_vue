@@ -8,5 +8,6 @@ export default () => ({
   },
   user: {
     ga_clientId: '',
+    loggedin: false,
   },
 })

@@ -16,4 +16,7 @@ export default {
   updateCartCount(state, count) {
     state.cart.cart_count = count
   },
+  updateUserLoggedin(state, status) {
+    state.user.loggedin = status
+  },
 }

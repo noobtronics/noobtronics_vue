@@ -38,6 +38,7 @@ export default (context, inject) => {
   }
   const setDefaults = function (data) {
     this.$store.commit('updateCartCount', data.default.cart_count)
+    this.$store.commit('updateUserLoggedin', data.default.loggedin)
   }
 
   // Inject $hello(msg) in Vue, context and store.
