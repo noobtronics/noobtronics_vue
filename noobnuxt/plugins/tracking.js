@@ -36,7 +36,12 @@ export default (context, inject) => {
       })
     }
   }
+  const setDefaults = function (data) {
+    this.$store.commit('updateCartCount', data.default.cart_count)
+  }
+
   // Inject $hello(msg) in Vue, context and store.
   inject('get_trackers', getTrackers)
   inject('set_trackers', setTrackers)
+  inject('set_default', setDefaults)
 }

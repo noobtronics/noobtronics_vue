@@ -393,8 +393,8 @@ export default {
           params: trackers,
         })
         .then(function (response) {
-          console.log(response)
           that.$set_trackers(response.trackers)
+          that.$set_default(response)
         })
     })
   },

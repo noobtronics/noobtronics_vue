@@ -13,4 +13,7 @@ export default {
   updateGAClientID(state, id) {
     state.user.ga_clientId = id
   },
+  updateCartCount(state, count) {
+    state.cart.cart_count = count
+  },
 }

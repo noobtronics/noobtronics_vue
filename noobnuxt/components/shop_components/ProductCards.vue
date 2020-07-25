@@ -69,6 +69,7 @@ export default {
         .post('/api/user/cart', { sku: sku, trackers: self.$get_trackers() })
         .then(function (response) {
           self.$notify('cartadded', 'SKU: ' + sku)
+          self.$set_default(response.data)
         })
         .catch(function () {
           self.$notify('failed', 'Server Error Occured <br>Try Refreshing Page')
