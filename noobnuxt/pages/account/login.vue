@@ -87,19 +87,22 @@
                   </span>
                 </div>
               </div>
-              <div class="field is-grouped">
+              <div class="field is-grouped" style="margin-top: 30px;">
                 <div class="control is-expanded">
-                  <button class="button is-primary is-outlined is-fullwidth">
-                    Sign In!
+                  <button class="button is-fullwidth noobbtn">
+                    Log In!
                   </button>
                 </div>
                 <div class="control is-expanded">
-                  <button class="button is-primary is-fullwidth">
+                  <button class="button is-fullwidth noobbtn">
                     Sign up!
                   </button>
                 </div>
               </div>
-              <p>
+              <p style="margin-top: 30px;">
+                <a>Forgot Password ?</a>
+              </p>
+              <p style="margin-top: 20px;">
                 By signing in you agree with the
                 <a href="#">Terms and Conditions</a> and
                 <a href="#">Privacy Policy</a>.
