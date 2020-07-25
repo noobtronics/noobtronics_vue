@@ -89,14 +89,14 @@
               </div>
               <div class="field is-grouped" style="margin-top: 30px;">
                 <div class="control is-expanded">
-                  <button class="button is-fullwidth noobbtn">
+                  <a class="button is-fullwidth noobbtn">
                     Log In!
-                  </button>
+                  </a>
                 </div>
                 <div class="control is-expanded">
-                  <button class="button is-fullwidth noobbtn">
+                  <a class="button is-fullwidth noobbtn" @click="gotoSignup()">
                     Sign up!
-                  </button>
+                  </a>
                 </div>
               </div>
               <p style="margin-top: 30px;">
@@ -104,8 +104,10 @@
               </p>
               <p style="margin-top: 20px;">
                 By signing in you agree with the
-                <a href="#">Terms and Conditions</a> and
-                <a href="#">Privacy Policy</a>.
+                <nuxt-link to="/terms-and-conditions"
+                  >Terms and Conditions</nuxt-link
+                >
+                and <nuxt-link to="/privacy-policy">Privacy Policy</nuxt-link>.
               </p>
             </form>
           </div>
@@ -118,6 +120,11 @@
 <script>
 export default {
   components: {},
-  layout: 'blog', // you can set a custom layout for the error page
+  methods: {
+    gotoSignup: function () {
+      const url = '/account/signup'
+      this.$router.push(url)
+    },
+  },
 }
 </script>
