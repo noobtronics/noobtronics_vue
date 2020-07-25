@@ -21,6 +21,7 @@
     }
   },
   "dependencies": {
+    "@creativebulma/bulma-badge": "^1.0.1",
     "@nuxtjs/amp": "^0.2.4",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/bulma": "^1.2.1",

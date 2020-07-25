@@ -66,6 +66,13 @@
             title="Cart"
             @click="openCart"
           >
+            <pre
+              v-if="cart_count > 0"
+              title="Cart Total"
+              class="badge is-danger"
+              style="top: 20px; right: 10px; z-index: 10;"
+              >{{ cart_count }}</pre
+            >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -250,11 +257,13 @@
           <div class="navbar-item btnitem">
             <div class="field">
               <p class="control">
-                <a
-                  class="button badge is-inverted badge is-badge-danger navbarbtn"
-                  :data-badge="cart_count > 0 ? cart_count : false"
-                  @click="openCart"
-                >
+                <button class="button navbarbtn" @click="openCart">
+                  <span
+                    v-if="cart_count > 0"
+                    title="Cart Total"
+                    class="badge is-danger"
+                    >{{ cart_count }}</span
+                  >
                   <span class="icon">
                     <img
                       alt="checkout icon"
@@ -262,7 +271,7 @@
                     />
                   </span>
                   <span>Cart</span>
-                </a>
+                </button>
               </p>
             </div>
           </div>
