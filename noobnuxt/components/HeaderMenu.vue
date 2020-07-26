@@ -334,13 +334,9 @@
                 <nuxt-link class="navbar-item" to="/account/orders">
                   Your Orders
                 </nuxt-link>
-                <nuxt-link
-                  v-if="user_loggedin"
-                  class="navbar-item"
-                  to="/account/logout"
-                >
+                <a v-if="user_loggedin" class="navbar-item" @click="doLogOut()">
                   Log Out
-                </nuxt-link>
+                </a>
               </div>
             </div>
           </div>
@@ -445,6 +441,20 @@ export default {
     },
     toggleAccountBar: function () {
       this.isAccountMenuActive = !this.isAccountMenuActive
+    },
+    doLogOut: function () {
+      const self = this
+      this.$axios
+        .$post('api/user/logout', {
+          trackers: self.$get_trackers(),
+        })
+        .then(function () {
+          self.$cookies.set('uid', '', {
+            expires: 999,
+          })
+          location.reload()
+        })
+        .catch(function () {})
     },
   },
 }

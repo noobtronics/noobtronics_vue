@@ -17,6 +17,8 @@ export default {
     state.cart.cart_count = count
   },
   updateUserLoggedin(state, status) {
+    console.log('status - ')
+    console.log(status)
     state.user.loggedin = status
   },
 }
