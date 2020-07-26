@@ -9,7 +9,12 @@
             <form>
               <div class="field">
                 <div class="control has-icons-left">
-                  <input class="input" type="email" placeholder="Email" />
+                  <input
+                    v-model="email"
+                    class="input"
+                    type="email"
+                    placeholder="Email"
+                  />
                   <span class="icon is-small is-left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +54,12 @@
               </div>
               <div class="field">
                 <div class="control has-icons-left">
-                  <input class="input" type="password" placeholder="Password" />
+                  <input
+                    v-model="password"
+                    class="input"
+                    type="password"
+                    placeholder="Password"
+                  />
                   <span class="icon is-small is-left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +99,7 @@
               </div>
               <div class="field is-grouped" style="margin-top: 30px;">
                 <div class="control is-expanded">
-                  <a class="button is-fullwidth noobbtn">
+                  <a class="button is-fullwidth noobbtn" @click="doLogin()">
                     Log In!
                   </a>
                 </div>
@@ -120,10 +130,49 @@
 <script>
 export default {
   components: {},
+  layout: 'nocache-default',
+  data: function () {
+    return {
+      email: '',
+      password: '',
+    }
+  },
   methods: {
     gotoSignup: function () {
       const url = '/account/signup'
       this.$router.push(url)
+    },
+    doLogin: function () {
+      if (this.$validator.isEmpty(this.email)) {
+        this.$notify('failed', 'Please enter Email.')
+        return
+      }
+      if (this.$validator.isEmpty(this.password)) {
+        this.$notify('failed', 'Please enter Password.')
+        return
+      }
+
+      const self = this
+      this.$axios
+        .$post('api/user/login', {
+          email: self.email,
+          password: self.password,
+          trackers: self.$get_trackers(),
+        })
+        .then(function () {
+          self.$notify('success', 'You are loggedin')
+        })
+        .catch(function (error) {
+          if (error.response.status === 400) {
+            self.$notify('failed', 'Email does not exists, you can signup')
+            return
+          }
+          if (error.response.status === 401) {
+            self.$notify('failed', 'Password verification failed')
+            return
+          }
+          self.$notify('failed', 'Server Error Occured <br>Try Refreshing Page')
+        })
     },
   },
 }

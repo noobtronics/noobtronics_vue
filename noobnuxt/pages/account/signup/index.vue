@@ -170,6 +170,7 @@
 <script>
 export default {
   components: {},
+  layout: 'nocache-default',
   data: function () {
     return {
       name: '',
@@ -208,7 +209,7 @@ export default {
           trackers: self.$get_trackers(),
         })
         .then(function (response) {
-          console.log(response)
+          // console.log(response)
         })
         .catch(function (error) {
           if (error.response.data.reason === 'EmailExists') {
