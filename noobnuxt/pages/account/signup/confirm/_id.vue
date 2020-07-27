@@ -62,6 +62,7 @@
                       class="input"
                       type="password"
                       placeholder="Confirm Password"
+                      @keyup.enter="savePassword()"
                     />
                     <span class="icon is-small is-left">
                       <svg

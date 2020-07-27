@@ -64,6 +64,7 @@
                       class="input"
                       type="password"
                       placeholder="Password"
+                      @keyup.enter="doLogin()"
                     />
                     <span class="icon is-small is-left">
                       <svg
