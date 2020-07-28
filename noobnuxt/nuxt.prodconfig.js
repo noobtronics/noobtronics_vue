@@ -40,6 +40,7 @@ export default {
     '@/plugins/raise404.js',
     '@/plugins/picture.js',
     '@/plugins/notify.js',
+    '@/plugins/tracking.js',
   ],
 
   styleResources: {
@@ -48,28 +49,43 @@ export default {
   /*
    ** Nuxt.js dev-modules
    */
-   buildModules: [
-     // Doc: https://github.com/nuxt-community/eslint-module
-     '@nuxtjs/eslint-module',
-     '@nuxtjs/style-resources',
-     // Doc: https://github.com/nuxt-community/stylelint-module
-     '@nuxtjs/stylelint-module',
-     '~/modules/pwa_extension.js',
-     '@nuxtjs/pwa',
-     '~/modules/async_css.js',
-   ],
-   /*
-    ** Nuxt.js modules
-    */
-   modules: [
-     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
-     // Doc: https://axios.nuxtjs.org/usage
-     '@nuxtjs/axios',
-   ],
+  buildModules: [
+    // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources',
+    // Doc: https://github.com/nuxt-community/stylelint-module
+    '@nuxtjs/stylelint-module',
+    '~/modules/pwa_extension.js',
+    '@nuxtjs/pwa',
+    '~/modules/async_css.js',
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-125040779-2',
+      },
+    ],
+  ],
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
+   ** Nuxt.js modules
    */
+  modules: [
+    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
+    // Doc: https://axios.nuxtjs.org/usage
+    '@nuxtjs/axios',
+  ],
+  googleAnalytics: {
+    debug: {
+      enabled: false,
+      sendHitTask: true,
+    },
+    autoTracking: {
+      exception: true,
+      ecommerce: {
+        enabled: true,
+        enhanced: true,
+      },
+    },
+  },
   axios: {
     host: 'api.noobtronics.in',
     port: 443,
@@ -157,27 +173,26 @@ export default {
     },
     workbox: {
       cacheId: 'noobtronics',
-      dev: true,
+      dev: false,
+
+      offlineAnalytics: true,
 
       runtimeCaching: [
         {
-          urlPattern: 'https:\/\/cdn\.noobtronics\.in\/.*\.(webp|jpg)',
-          handler: 'cacheFirst'
+          urlPattern: 'https://cdn.noobtronics.in/.*.(webp|jpg)',
+          handler: 'cacheFirst',
         },
         {
-          urlPattern: 'https:\/\/api\.noobtronics\.in\/api\/.*',
+          urlPattern: 'https://api.noobtronics.in/api/.*',
           method: 'GET',
-          handler: 'networkFirst'
+          handler: 'networkFirst',
         },
       ],
     },
   },
 
   generate: {
-    routes: [
-      '/shop',
-      '/',
-    ],
+    routes: ['/shop', '/'],
     fallback: true,
   },
 }

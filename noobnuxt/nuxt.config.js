@@ -73,16 +73,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  // axios: {
-  //   host: 'api.noobtronics.in',
-  //   port: 443,
-  //   https: true,
-  // },
-
   googleAnalytics: {
     debug: {
       enabled: true,
