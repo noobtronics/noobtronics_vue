@@ -113,7 +113,7 @@
                 </div>
                 <div class="level-item">
                   <p class="level-item">
-                    <button id="add-to-cart" class="button is-warning">
+                    <button class="button is-warning" @click="addToCart()">
                       Add to Cart
                     </button>
                   </p>
@@ -126,11 +126,10 @@
                 Ships from India. All India Delivery <br />(3-4 days for metros)
               </p>
               <nav class="level is-mobile">
-                <p
-                  id="product_in_stock"
-                  class="level-item"
-                  v-html="selected_variant.stock"
-                ></p>
+                <p v-if="selected_variant.stock" class="level-item">
+                  in stock
+                </p>
+                <p v-else class="level-item">out of stock</p>
               </nav>
             </div>
           </div>
@@ -231,7 +230,7 @@ export default {
   created: function () {
     this.change_image_by_id(this.data.images.mainimage.id)
     this.selected_variant.stock = this.data.variants[0].stock
-    this.selected_variant.price = this.data.variants[0].price
+    this.selected_variant.price = '₹' + this.data.variants[0].price
   },
   methods: {
     change_image_by_id: function (id) {
@@ -239,10 +238,38 @@ export default {
     },
     change_variant: function (id) {
       const variant = this.data.variants_dic[id]
+      this.selected_variant.sku = variant.sku
       this.selected_variant.id = variant.id
+      this.selected_variant.name = variant.name
+      this.selected_variant.product = variant.product
       this.selected_variant.price = '₹' + variant.price
       this.selected_variant.stock = variant.stock
       this.change_image_by_id(variant.image)
+    },
+    addToCart: function () {
+      const sku = this.selected_variant.sku
+      const self = this
+      if (!sku) {
+        self.$notify('failed', 'Please select variant')
+        return
+      }
+      if (!this.selected_variant.stock) {
+        self.$notify(
+          'failed',
+          'Veriant not in stock' + '<br>Name: ' + self.selected_variant.name
+        )
+        return
+      }
+      this.$axios
+        .post('/api/user/cart', { sku: sku, trackers: self.$get_trackers() })
+        .then(function (response) {
+          self.$notify('cartadded', 'Name: ' + self.selected_variant.name)
+          self.$set_default(response.data)
+        })
+        .catch(function () {
+          self.$notify('failed', 'Server Error Occured <br>Try Refreshing Page')
+        })
+        .then(function () {})
     },
   },
 }
